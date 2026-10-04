@@ -13,7 +13,7 @@
     <a href="https://jnmetacode.github.io/impeccable-zh/"><strong>访问中文使用中心</strong></a>
     · <a href="#快速开始">快速开始</a>
     · <a href="docs/CASE-STUDY.zh-CN.md">查看演示案例</a>
-    · <a href="README.md">English upstream README</a>
+    · <a href="https://github.com/pbakaus/impeccable#readme">English upstream README</a>
   </p>
 </div>
 

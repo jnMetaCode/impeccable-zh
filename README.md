@@ -1,10 +1,53 @@
-# Impeccable
+# Impeccable 中文社区增强版
 
-> [简体中文社区增强版说明](README.zh-CN.md)（Alpha 开发中，非官方衍生版）
+> 让 AI 不止会写界面，还懂中文产品设计。
+
+[![中文覆盖](https://img.shields.io/badge/中文覆盖-43%2F43-success)](locales/zh-CN/source-map.json)
+[![构建目标](https://img.shields.io/badge/构建目标-19-1d6358)](scripts/lib/transformers/providers.js)
+[![设计命令](https://img.shields.io/badge/设计命令-24-d54c28)](https://jnmetacode.github.io/impeccable-zh/#commands)
+[![Localization CI](https://github.com/jnMetaCode/impeccable-zh/actions/workflows/localization-ci.yml/badge.svg)](https://github.com/jnMetaCode/impeccable-zh/actions/workflows/localization-ci.yml)
+[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
+
+完整汉化 Impeccable 的 AI 产品设计工作流，并加入中文排版、中文 UX 文案与国内常用 UI 框架指导。支持 Claude Code、Codex、Cursor、Trae 国内版、GitHub Copilot、Gemini CLI 等 19 种构建目标。
+
+**[访问中文使用中心](https://jnmetacode.github.io/impeccable-zh/)** · [完整中文文档](README.zh-CN.md) · [演示案例](docs/CASE-STUDY.zh-CN.md) · [上游项目](https://github.com/pbakaus/impeccable)
+
+![Impeccable 中文版官网与使用中心](docs/assets/web-showcase.png)
+
+## 中文版亮点
+
+| 能力 | 当前状态 |
+|---|---|
+| 核心中文内容 | 43 / 43 文件，带逐文件上游漂移检查 |
+| 中文原创增强 | 中文排版、中文 UX 文案、国内 UI 框架 |
+| 设计工作流 | 24 个命令、61 条确定性检测规则 |
+| 工具接入 | 19 个 Provider 构建目标 |
+| 使用与展示 | 响应式中文 Web 使用中心、安装向导与可复现案例 |
+
+### 从源码开始使用
+
+当前为 Alpha，尚未发布同名稳定安装包。请固定 Git commit 从源码构建：
+
+```bash
+git clone https://github.com/jnMetaCode/impeccable-zh.git
+cd impeccable-zh
+npm install --ignore-scripts
+npm run localization:build
+npx impeccable link --source=. --providers=claude,codex,cursor
+```
+
+重新加载 AI 编程工具后运行 `/impeccable init`。团队安装、更新、质量门禁和上游同步方法请阅读[完整中文文档](README.zh-CN.md)。
+
+> [!IMPORTANT]
+> 本项目是非官方社区衍生版，与上游作者不存在官方隶属或背书关系。下方保留上游英文说明，方便核对原始能力与协议边界。
+
+---
+
+## Upstream English documentation
 
 Design guidance for AI coding agents. 1 skill, 24 commands, live browser iteration, and 61 deterministic detector rules for AI-generated frontend design.
 
-> **Quick start:** From your project root, run `npx impeccable install`, then run `/impeccable init` inside your AI coding tool. Full docs: [impeccable.style](https://impeccable.style).
+> **Upstream quick start:** From your project root, run `npx impeccable install`, then run `/impeccable init` inside your AI coding tool. Full upstream docs: [impeccable.style](https://impeccable.style).
 
 ## Why Impeccable?
 
