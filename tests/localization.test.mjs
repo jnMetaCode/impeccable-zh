@@ -174,8 +174,9 @@ test('parses and classifies upstream translation changes', () => {
   assert.equal(impact.newUntranslated.length, 1);
 });
 
-test('audits the locally available upstream ref without fetching', () => {
-  const report = auditUpstreamSync(projectRoot);
+test('audits the frozen upstream revision without requiring a named remote', () => {
+  const lock = JSON.parse(fs.readFileSync(path.join(projectRoot, 'upstream-lock.json'), 'utf8'));
+  const report = auditUpstreamSync(projectRoot, lock.commit);
   assert.deepEqual(report.errors, []);
   assert.equal(report.relation, 'same');
   assert.equal(report.baseCommit, '0d6b47ea19b63afe15e3f93a44d5d9fbbc6fd275');
