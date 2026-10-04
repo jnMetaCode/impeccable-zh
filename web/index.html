@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Impeccable 中文社区增强版：为 19 种 AI 编程工具提供完整中文设计指导。">
+  <title>Impeccable 中文版 · 让 AI 真正懂中文产品设计</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Impeccable 中文版首页">
+        <span class="brand-mark" aria-hidden="true">今</span>
+        <span><b>Impeccable</b><small>中文社区增强版</small></span>
+      </a>
+      <nav aria-label="主导航">
+        <a href="#install">安装</a>
+        <a href="#commands">命令</a>
+        <a href="#chinese">中文增强</a>
+        <a class="nav-github" href="https://github.com/jnMetaCode/impeccable-zh">GitHub ↗</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> Alpha · 100% 核心内容覆盖</p>
+          <h1>让 AI 不止会写界面，<em>还懂中文产品。</em></h1>
+          <p class="hero-lead">完整本地化 Impeccable 的设计工作流，并针对中文排版、UX 文案与国内 UI 框架补上关键语境。一次安装，接入你正在使用的 AI 编程工具。</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#install">生成安装步骤</a>
+            <a class="button button-secondary" href="#commands">浏览 24 个命令</a>
+          </div>
+          <p class="alpha-note">非官方社区衍生版 · 当前建议从源码构建</p>
+        </div>
+        <aside class="hero-panel" aria-label="项目状态">
+          <div class="seal"><span>简体中文</span><strong>43 / 43</strong><small>核心源文件</small></div>
+          <div class="status-grid">
+            <div><strong data-project-value="buildTargets">19</strong><span>构建目标</span></div>
+            <div><strong data-project-value="commands">24</strong><span>设计命令</span></div>
+            <div><strong data-project-value="rules">61</strong><span>检测规则</span></div>
+            <div><strong>3</strong><span>中文增强</span></div>
+          </div>
+          <p><i aria-hidden="true"></i> 锁定上游 <code>0d6b47e</code>，逐文件漂移检查</p>
+        </aside>
+      </section>
+
+      <section class="section install-section" id="install">
+        <div class="section-heading">
+          <p class="kicker">01 · 安装向导</p>
+          <h2>选择你的 AI 编程工具</h2>
+          <p>安装向导采用 Git submodule，团队可以审查版本、固定提交并随项目一起更新。</p>
+        </div>
+        <div class="installer">
+          <div class="provider-column">
+            <p class="field-label">构建目标 <span>共 19 种</span></p>
+            <div class="provider-list" data-provider-list></div>
+          </div>
+          <div class="terminal-card">
+            <div class="terminal-topbar">
+              <span><i></i><i></i><i></i></span>
+              <p>安装到当前项目 · <b data-selected-provider>Claude Code</b></p>
+              <button type="button" data-copy-target="[data-install-code]" data-copy-label="安装步骤">复制全部</button>
+            </div>
+            <pre class="install-code" data-install-code></pre>
+            <div class="terminal-footer">
+              <span>完成后重新加载 AI 工具</span>
+              <code>/impeccable init</code>
+            </div>
+          </div>
+        </div>
+        <div class="notice"><strong>Alpha 提示</strong><span>当前没有稳定发布包；向导会从源码构建中文分发物。安装前请确保 Node.js 22.18+，推荐同时安装 Bun。</span></div>
+      </section>
+
+      <section class="section chinese-section" id="chinese">
+        <div class="section-heading compact">
+          <p class="kicker">02 · 中文增强</p>
+          <h2>翻译只是起点，语境才是能力</h2>
+        </div>
+        <div class="feature-grid">
+          <article><span class="feature-no">壹</span><h3>中文排版</h3><p>字重、行高、标点挤压、数字与中文混排、触摸目标及可访问性，不照搬西文参数。</p><code>typeset · layout · adapt</code></article>
+          <article><span class="feature-no">贰</span><h3>中文 UX 文案</h3><p>处理按钮、错误、空状态、确认与风险提示，让文案简洁、自然且符合国内产品习惯。</p><code>clarify · onboard · harden</code></article>
+          <article><span class="feature-no">叁</span><h3>国内 UI 框架</h3><p>覆盖 Ant Design、Element Plus、TDesign、Arco Design 等常见体系的适配判断。</p><code>craft · shape · audit</code></article>
+        </div>
+      </section>
+
+      <section class="section commands-section" id="commands">
+        <div class="section-heading command-heading">
+          <div><p class="kicker">03 · 命令手册</p><h2>从一句话开始改进设计</h2></div>
+          <p>所有能力都通过一个入口调用：<code>/impeccable &lt;命令&gt; &lt;目标&gt;</code></p>
+        </div>
+        <div class="command-tools">
+          <label class="search-field"><span aria-hidden="true">⌕</span><span class="sr-only">搜索命令</span><input type="search" placeholder="搜索：排版、审计、动效…" data-command-search></label>
+          <label class="category-field"><span class="sr-only">按分类筛选</span><select data-command-category><option value="">全部分类</option></select></label>
+          <p data-command-count>显示 24 / 24 条命令</p>
+        </div>
+        <div class="command-list" data-command-list></div>
+      </section>
+
+      <section class="closing-section">
+        <p class="kicker">准备开始</p>
+        <h2>先让 AI 理解产品，再让它动手。</h2>
+        <div><a class="button button-primary" href="#install">选择工具并安装</a><a class="text-link" href="https://github.com/jnMetaCode/impeccable-zh/blob/main/README.zh-CN.md">阅读项目文档 →</a></div>
+      </section>
+    </main>
+
+    <footer><p>Impeccable 中文社区增强版 · Apache-2.0</p><p>基于 <a href="https://github.com/pbakaus/impeccable">pbakaus/impeccable</a>，与上游作者无官方隶属关系。</p></footer>
+  </div>
+  <p class="copy-status" role="status" aria-live="polite" data-copy-status></p>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

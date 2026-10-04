@@ -40,6 +40,17 @@ npm run localization:build
 
 `localization:build` 会生成 `dist/`，但不会同步或改写仓库中跟踪的宿主目录。
 
+## Web 使用入口
+
+仓库内提供无外部前端依赖的响应式 Web 端，可选择 19 个构建目标、生成源码安装步骤、搜索 24 个命令并一键复制：
+
+```bash
+npm run web:test
+npm run web:preview
+```
+
+默认访问 `http://127.0.0.1:4173`。`web:build` 会把可直接部署到静态托管或 GitHub Pages 的文件生成到 `build/web/`。
+
 中文行为评测默认不会发起模型调用。显式配置模型、凭证和 engine 后，按 [中文行为评测说明](tests/localization-evals/README.md)运行；未人工补充逐条证据的轨迹会被评分器判定为 incomplete。
 
 ## 上游同步

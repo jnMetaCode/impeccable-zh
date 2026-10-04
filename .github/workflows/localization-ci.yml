@@ -12,6 +12,9 @@ on:
       - "scripts/localization/**"
       - "tests/localization*.mjs"
       - "tests/localization-evals/**"
+      - "tests/web.test.mjs"
+      - "scripts/web/**"
+      - "web/**"
       - "upstream-lock.json"
       - "package.json"
       - "bun.lock"
@@ -29,6 +32,9 @@ on:
       - "scripts/localization/**"
       - "tests/localization*.mjs"
       - "tests/localization-evals/**"
+      - "tests/web.test.mjs"
+      - "scripts/web/**"
+      - "web/**"
       - "upstream-lock.json"
       - "package.json"
       - "bun.lock"
@@ -83,6 +89,9 @@ jobs:
 
       - name: Build localized provider bundles
         run: bun run localization:build
+
+      - name: Test and build the Chinese web app
+        run: bun run web:test && bun run web:build
 
       - name: Install the pinned Rust toolchain
         if: matrix.node-version == 24

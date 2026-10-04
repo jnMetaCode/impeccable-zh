@@ -80,7 +80,10 @@
     "localization:report": "node scripts/localization/report.mjs",
     "localization:sync-audit": "node scripts/localization/sync-audit.mjs",
     "localization:eval:run": "node scripts/localization/eval-run.mjs",
-    "localization:eval:score": "node scripts/localization/eval-score.mjs"
+    "localization:eval:score": "node scripts/localization/eval-score.mjs",
+    "web:build": "node scripts/web/build.mjs",
+    "web:preview": "npm run web:build && node scripts/web/serve.mjs",
+    "web:test": "node --test tests/web.test.mjs"
   },
   "optionalDependencies": {
     "@impeccable/cli-darwin-arm64": "0.1.8",
