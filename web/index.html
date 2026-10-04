@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Impeccable 中文社区增强版：为 19 种 AI 编程工具提供完整中文设计指导。">
   <title>Impeccable 中文版 · 让 AI 真正懂中文产品设计</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23d54c28'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-size='38' fill='%23f4f0e7'%3E今%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -18,6 +19,7 @@
       <nav aria-label="主导航">
         <a href="#install">安装</a>
         <a href="#commands">命令</a>
+        <a href="#case">案例</a>
         <a href="#chinese">中文增强</a>
         <a class="nav-github" href="https://github.com/jnMetaCode/impeccable-zh">GitHub ↗</a>
       </nav>
@@ -86,9 +88,44 @@
         </div>
       </section>
 
+      <section class="section case-section" id="case">
+        <div class="section-heading">
+          <p class="kicker">03 · 演示案例</p>
+          <h2>从“能填”到“愿意填”的中文表单</h2>
+          <p>基于仓库 Element Plus 测试夹具的可复现演示。它不是客户案例，也不使用虚构的业务提升数据。</p>
+        </div>
+        <div class="case-stage">
+          <article class="case-pane case-before">
+            <div class="case-label"><span>改进前</span><small>框架默认值直接上线</small></div>
+            <div class="mock-window">
+              <p class="mock-title">完善企业认证信息</p>
+              <label>企业法定全称<input value="上海示例数字科技有限责任公司" readonly></label>
+              <label>业务联系人及所属部门<input value="陈小明 / 数字化产品与客户成功部" readonly></label>
+              <p class="mock-help">提交后不可修改请仔细核对以上所有资料是否准确完整</p>
+              <div class="mock-actions"><button type="button">取消</button><button type="button">提交认证</button></div>
+            </div>
+            <ul><li>中文标签与输入内容争抢宽度</li><li>操作层级不清，帮助文字难读</li><li>未覆盖手机和超长内容</li></ul>
+          </article>
+          <div class="case-flow" aria-label="使用的命令"><code>audit</code><span>→</span><code>typeset</code><span>→</span><code>adapt</code><span>→</span><code>polish</code></div>
+          <article class="case-pane case-after">
+            <div class="case-label"><span>改进目标</span><small>中文语境 + 状态完整性</small></div>
+            <div class="mock-window improved">
+              <p class="mock-step">企业认证 · 第 2 / 3 步</p>
+              <p class="mock-title">核对企业信息</p>
+              <label>企业全称<input value="上海示例数字科技有限责任公司" readonly></label>
+              <label>联系人<input value="陈小明" readonly></label>
+              <p class="mock-help">提交后仍可由管理员发起资料变更。</p>
+              <div class="mock-actions"><button type="button">返回上一步</button><button type="button">确认并继续</button></div>
+            </div>
+            <ul><li>320px 宽度无横向滚动或裁切</li><li>触摸目标至少 44×44 CSS px</li><li>主次动作、风险和恢复路径明确</li></ul>
+          </article>
+        </div>
+        <p class="case-link"><a href="https://github.com/jnMetaCode/impeccable-zh/blob/main/docs/CASE-STUDY.zh-CN.md">查看输入夹具、评测门禁与完整复现步骤 →</a></p>
+      </section>
+
       <section class="section commands-section" id="commands">
         <div class="section-heading command-heading">
-          <div><p class="kicker">03 · 命令手册</p><h2>从一句话开始改进设计</h2></div>
+          <div><p class="kicker">04 · 命令手册</p><h2>从一句话开始改进设计</h2></div>
           <p>所有能力都通过一个入口调用：<code>/impeccable &lt;命令&gt; &lt;目标&gt;</code></p>
         </div>
         <div class="command-tools">

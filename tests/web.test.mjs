@@ -47,6 +47,8 @@ test('web page has the accessibility and responsive contracts', () => {
   assert.match(html, /class="skip-link"/);
   assert.match(html, /data-provider-list/);
   assert.match(html, /data-command-search/);
+  assert.match(html, /id="case"/);
+  assert.match(html, /它不是客户案例/);
   assert.match(css, /@media \(max-width: 620px\)/);
   assert.match(css, /prefers-reduced-motion/);
 });
