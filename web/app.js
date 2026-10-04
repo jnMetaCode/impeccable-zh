@@ -1,4 +1,19 @@
-import { commandText, commands, installSteps, project, providers } from './catalog.js';
+const locale = document.documentElement.lang;
+const isTraditional = locale === 'zh-TW';
+const { commandText, commands, installSteps, project, providers } = await import(
+  isTraditional ? './catalog.zh-TW.js' : './catalog.js'
+);
+const messages = isTraditional ? {
+  count: (shown, total) => `顯示 ${shown} / ${total} 條命令`,
+  empty: '沒有符合的命令，試試「排版」「稽核」或清除篩選。',
+  copied: (label) => `${label}已複製`,
+  command: '命令',
+} : {
+  count: (shown, total) => `显示 ${shown} / ${total} 条命令`,
+  empty: '没有匹配的命令，试试“排版”“审计”或清除筛选。',
+  copied: (label) => `${label}已复制`,
+  command: '命令',
+};
 
 const providerList = document.querySelector('[data-provider-list]');
 const selectedProvider = document.querySelector('[data-selected-provider]');
@@ -41,13 +56,13 @@ function renderInstall() {
 }
 
 function renderCommands() {
-  const query = search.value.trim().toLocaleLowerCase('zh-CN');
+  const query = search.value.trim().toLocaleLowerCase(locale);
   const selectedCategory = category.value;
   const filtered = commands.filter((command) => {
-    const haystack = `${command.name} ${command.title} ${command.description} ${command.category}`.toLocaleLowerCase('zh-CN');
+    const haystack = `${command.name} ${command.title} ${command.description} ${command.category}`.toLocaleLowerCase(locale);
     return (!query || haystack.includes(query)) && (!selectedCategory || command.category === selectedCategory);
   });
-  commandCount.textContent = `显示 ${filtered.length} / ${commands.length} 条命令`;
+  commandCount.textContent = messages.count(filtered.length, commands.length);
   commandList.innerHTML = filtered.length ? filtered.map((command) => {
     const value = commandText(command);
     return `
@@ -60,10 +75,10 @@ function renderCommands() {
         </button>
       </article>
     `;
-  }).join('') : '<p class="empty-state">没有匹配的命令，试试“排版”“审计”或清除筛选。</p>';
+  }).join('') : `<p class="empty-state">${messages.empty}</p>`;
 }
 
-async function copy(value, label = '命令') {
+async function copy(value, label = messages.command) {
   try {
     await navigator.clipboard.writeText(value);
   } catch {
@@ -76,7 +91,7 @@ async function copy(value, label = '命令') {
     document.execCommand('copy');
     textarea.remove();
   }
-  copyStatus.textContent = `${label}已复制`;
+  copyStatus.textContent = messages.copied(label);
   window.setTimeout(() => { copyStatus.textContent = ''; }, 1800);
 }
 
@@ -92,7 +107,7 @@ document.addEventListener('click', (event) => {
   const button = event.target.closest('[data-copy-value], [data-copy-target]');
   if (!button) return;
   const target = button.dataset.copyTarget && document.querySelector(button.dataset.copyTarget);
-  copy(button.dataset.copyValue || target?.dataset.copyValue || '', button.dataset.copyLabel || '命令');
+  copy(button.dataset.copyValue || target?.dataset.copyValue || '', button.dataset.copyLabel || messages.command);
 });
 
 search.addEventListener('input', renderCommands);

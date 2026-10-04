@@ -10,13 +10,16 @@ const PROJECT_FALLBACK =
 const PROJECT_FALLBACK_ZH =
   `该目录用于解析本 Skill 及引用文件里的所有 \`${PROJECT_SCRIPTS}/impeccable <verb>\` 命令，` +
   `只有运行时无法报告基目录时才使用 \`${PROJECT_SCRIPTS}\` 回退值。`;
+const PROJECT_FALLBACK_ZH_TW =
+  `該目錄用於解析本 Skill 及引用檔案裡的所有 \`${PROJECT_SCRIPTS}/impeccable <verb>\` 命令，` +
+  `只有執行時無法報告基目錄時才使用 \`${PROJECT_SCRIPTS}\` 回退值。`;
 
 // VS Code provides the loaded skill's URI, not Claude's substitution variables.
 // Relative Markdown links resolve beside that file; shell commands still run
 // from the user's project. Never fall back to another installed skill copy.
 export function rewriteVSCodeMarkdown(content, { isSkillEntrypoint = false } = {}) {
   if (isSkillEntrypoint) {
-    if (!content.includes(PROJECT_FALLBACK) && !content.includes(PROJECT_FALLBACK_ZH)) {
+    if (!content.includes(PROJECT_FALLBACK) && !content.includes(PROJECT_FALLBACK_ZH) && !content.includes(PROJECT_FALLBACK_ZH_TW)) {
       throw new Error('VS Code skill path rewrite drift: Setup fallback changed.');
     }
     content = content.replace(PROJECT_FALLBACK,
@@ -25,6 +28,9 @@ export function rewriteVSCodeMarkdown(content, { isSkillEntrypoint = false } = {
     content = content.replace(PROJECT_FALLBACK_ZH,
       '通过本 Skill 的[启动器](scripts/impeccable)确定安装目录。' +
       '运行命令前，把 `<skill-base-dir>` 替换为该绝对目录；它不是 shell 变量。');
+    content = content.replace(PROJECT_FALLBACK_ZH_TW,
+      '透過本 Skill 的[啟動器](scripts/impeccable)確定安裝目錄。' +
+      '執行命令前，把 `<skill-base-dir>` 替換為該絕對目錄；它不是 shell 變數。');
   }
   return content.replaceAll(PROJECT_SCRIPTS, '<skill-base-dir>/scripts')
     .replace(/(?<!["\w/])<skill-base-dir>\/scripts\/impeccable(\.cmd)?(?=[\s`])/g,

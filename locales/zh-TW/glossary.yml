@@ -1,0 +1,39 @@
+# 保留 command、檔名、設定鍵和程式碼識別符號原文。
+terms:
+  - source: design system
+    target: 設計系統
+  - source: visual world
+    target: 視覺體系
+  - source: surface
+    target: 介面表面
+    note: 指頁面、路由、功能介面或原生螢幕，不譯為“曲面”
+  - source: brief
+    target: 設計簡報
+  - source: craft
+    target: 設計完成度
+  - source: critique
+    target: 設計評審
+  - source: audit
+    target: 技術稽核
+  - source: finding
+    target: 檢查發現
+  - source: anti-pattern
+    target: 反模式
+  - source: live mode
+    target: 即時模式
+  - source: detector
+    target: 偵測器
+  - source: fixture
+    target: 測試樣例
+  - source: fallback
+    target: 回退方案
+  - source: visitor mode
+    target: 訪客模式
+  - source: Persuade
+    target: 說服
+  - source: Operate
+    target: 操作
+  - source: Read
+    target: 閱讀
+  - source: Experience
+    target: 體驗

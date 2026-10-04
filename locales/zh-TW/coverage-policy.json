@@ -1,0 +1,10 @@
+{
+  "schemaVersion": 1,
+  "baselineMinimumMappedFiles": 6,
+  "releaseMinimumPercent": 100,
+  "trackedRoots": [
+    "skill/SKILL.src.md",
+    "skill/reference/*.md",
+    "skill/agents/*.md"
+  ]
+}

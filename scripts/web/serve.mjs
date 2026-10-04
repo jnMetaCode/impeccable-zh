@@ -16,7 +16,11 @@ if (!fs.existsSync(path.join(root, 'index.html'))) {
 
 const server = http.createServer((request, response) => {
   const pathname = decodeURIComponent(new URL(request.url, `http://${request.headers.host}`).pathname);
-  const relative = pathname === '/' ? 'index.html' : pathname.replace(/^\/+/, '');
+  const relative = pathname === '/'
+    ? 'index.html'
+    : pathname.endsWith('/')
+      ? `${pathname.replace(/^\/+/, '')}index.html`
+      : pathname.replace(/^\/+/, '');
   const target = path.resolve(root, relative);
   const insideRoot = target === root || target.startsWith(`${root}${path.sep}`);
   if (!insideRoot || !fs.existsSync(target) || !fs.statSync(target).isFile()) {

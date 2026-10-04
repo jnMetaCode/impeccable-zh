@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "locale": "zh-TW",
+  "upstreamCommit": "0d6b47ea19b63afe15e3f93a44d5d9fbbc6fd275",
+  "scenarios": [
+    {
+      "id": "zh-tw-init-b2b-saas",
+      "command": "init",
+      "title": "中文 B2B SaaS 產品上下文初始化",
+      "prompt": "為這個面向連鎖門店的庫存協同 SaaS 初始化產品設計上下文。主要使用者是區域營運和門店店長，核心任務是發現缺貨風險並完成跨店調撥。不要修改業務程式碼。",
+      "fixtures": [
+        "fixtures/init-b2b-saas/README.md"
+      ],
+      "requiredReferences": ["init.md"],
+      "must": [
+        "讀取儲存庫證據後再形成產品結論",
+        "產生或更新 PRODUCT.md",
+        "記錄使用者、核心任務、產品邊界和待確認事實",
+        "把沒有證據的內容標記為假設或問題",
+        "不修改應用原始碼"
+      ],
+      "mustNot": [
+        "虛構已經存在的客戶資料或業務指標",
+        "在沒有請求時產生 DESIGN.md",
+        "把產品初始化誤路由為視覺重設計"
+      ]
+    },
+    {
+      "id": "zh-tw-typeset-finance-dashboard",
+      "command": "typeset",
+      "title": "中文金融儀表盤排版",
+      "prompt": "最佳化這個資金看板的中文排版。頁面包含人民幣金額、同比百分比、精確到分鐘的交易時間，以及中英文混排的產品名稱。保持現有品牌顏色和功能不變。",
+      "fixtures": [
+        "fixtures/typeset-finance-dashboard/index.html"
+      ],
+      "requiredReferences": ["typeset.md", "chinese-typeset-cn.md"],
+      "must": [
+        "應用中文字型回退和中文行高規則",
+        "處理中文標點避頭尾和中英文混排",
+        "使用 locale formatter 表達金額、百分比和時間",
+        "保持既有品牌顏色、文案事實和互動行為",
+        "檢查窄屏文字換行和數字列對齊"
+      ],
+      "mustNot": [
+        "用字串拼接格式化人民幣金額",
+        "把 1.2k 或 3m 直接作為正式中文金額",
+        "借排版最佳化之名重做整套視覺體系"
+      ]
+    },
+    {
+      "id": "zh-tw-harden-destructive-action",
+      "command": "harden",
+      "title": "高風險刪除與恢復路徑加固",
+      "prompt": "加固成員管理頁的刪除成員流程以及載入、空狀態和失敗狀態。刪除會立即撤銷權限，但 7 天內管理員可以恢復。",
+      "fixtures": [
+        "fixtures/harden-destructive-action/README.md"
+      ],
+      "requiredReferences": ["harden.md", "chinese-ux-copy-cn.md"],
+      "must": [
+        "確認文案明確操作物件、立即影響、可恢復期限和恢復路徑",
+        "區分首次為空、篩選無結果、無權限和載入失敗",
+        "錯誤資訊說明發生了什麼以及使用者下一步能做什麼",
+        "補齊鍵盤操作、焦點恢復和螢幕閱讀器回饋",
+        "驗證重複提交和請求超時不會產生錯誤狀態"
+      ],
+      "mustNot": [
+        "使用只有是否按鈕的模糊確認框",
+        "所有空狀態都顯示暫無資料",
+        "向使用者直接展示異常堆疊"
+      ]
+    },
+    {
+      "id": "zh-tw-adapt-element-plus-form",
+      "command": "adapt",
+      "title": "Element Plus 中文表單窄屏調整",
+      "prompt": "把這個 Element Plus 客戶資料表單調整到 360px 寬度，同時保留桌面端密度。修復中文長標籤、日期 locale、校驗資訊和彈層問題，不替換元件庫。",
+      "fixtures": [
+        "fixtures/adapt-element-plus-form/package.json",
+        "fixtures/adapt-element-plus-form/App.vue"
+      ],
+      "requiredReferences": ["adapt.md", "china-ui-frameworks-cn.md"],
+      "must": [
+        "從依賴和元件標籤識別 Element Plus 與 Vue 3",
+        "讀取中國大陸 UI 框架調整引用並保留現有元件庫",
+        "透過 ElConfigProvider 或現有全域入口統一中文 locale",
+        "在窄屏為中文長標籤選擇可讀的表單佈局",
+        "驗證日期元件 locale、錯誤文字、彈層和 200% 縮放"
+      ],
+      "mustNot": [
+        "引入第二套元件庫",
+        "透過縮小字號容納長標籤",
+        "使用深層選擇器和 important 批次覆蓋內部結構"
+      ]
+    }
+  ]
+}

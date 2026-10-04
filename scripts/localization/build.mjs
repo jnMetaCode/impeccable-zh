@@ -7,11 +7,13 @@ import { spawnSync } from 'node:child_process';
 
 import { composeLocalization, projectRoot } from './localization.mjs';
 
-const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'impeccable-zh-build-'));
+const localeIndex = process.argv.indexOf('--locale');
+const locale = localeIndex >= 0 ? process.argv[localeIndex + 1] : 'zh-CN';
+const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), `impeccable-${locale}-build-`));
 const skillDir = path.join(tempRoot, 'skill');
 
 try {
-  composeLocalization(skillDir);
+  composeLocalization(skillDir, projectRoot, locale);
   const bunCommand = process.platform === 'win32' ? 'bun.exe' : 'bun';
   const bunProbe = spawnSync(bunCommand, ['--version'], { stdio: 'ignore' });
   const command = bunProbe.error ? process.execPath : bunCommand;

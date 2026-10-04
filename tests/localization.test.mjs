@@ -29,6 +29,33 @@ test('localized files match their frozen upstream sources', () => {
   assert.equal(result.extensions.entries.length, 3);
 });
 
+test('Traditional Chinese files match the same frozen upstream sources', () => {
+  const result = validateLocalization(projectRoot, 'zh-TW');
+  assert.deepEqual(result.errors, []);
+  assert.equal(result.map.locale, 'zh-TW');
+  assert.equal(result.rows.length, 43);
+  assert.equal(result.coverage.total, 43);
+  assert.equal(result.coverage.mapped, 43);
+  assert.equal(result.coverage.percent, 100);
+  assert.equal(result.extensions.entries.length, 3);
+});
+
+test('composes a Traditional Chinese source tree with locale-specific extensions', () => {
+  const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'impeccable-zh-TW-'));
+  const output = path.join(tempRoot, 'skill');
+  try {
+    composeLocalization(output, projectRoot, 'zh-TW');
+    const localized = fs.readFileSync(path.join(output, 'SKILL.src.md'), 'utf8');
+    assert.match(localized, /本 Skill 提供工具/);
+    assert.match(localized, /使用者需求/);
+    assert.match(localized, /回應式/);
+    assert.ok(fs.existsSync(path.join(output, 'reference/chinese-typeset-cn.md')));
+    assert.match(fs.readFileSync(path.join(output, 'reference/chinese-ux-copy-cn.md'), 'utf8'), /繁體|中文/);
+  } finally {
+    fs.rmSync(tempRoot, { recursive: true, force: true });
+  }
+});
+
 test('composes a source tree without modifying upstream skill files', () => {
   const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'impeccable-zh-'));
   const output = path.join(tempRoot, 'skill');
@@ -132,6 +159,26 @@ test('VS Code rewrite preserves the localized Setup contract', () => {
   assert.doesNotMatch(rewritten, /只有运行时无法报告基目录时才使用/);
 });
 
+test('provider rewrites preserve the Traditional Chinese Setup contract', () => {
+  const source = fs.readFileSync(path.join(projectRoot, 'locales/zh-TW/skill/SKILL.src.md'), 'utf8');
+  const pluginSource = source
+    .replaceAll('{{scripts_path}}', '.claude/skills/impeccable/scripts')
+    .replaceAll('{{command_hint}}', 'command')
+    .replaceAll('{{command_prefix}}', '/');
+  const plugin = rewritePluginMarkdown(pluginSource);
+  assert.match(plugin, /CLAUDE_SKILL_DIR/);
+  assert.match(plugin, /本 Skill 及引用檔案中的每條/);
+  assert.doesNotMatch(plugin, /只有執行時無法報告基目錄時才使用/);
+
+  const vscodeSource = source
+    .replaceAll('{{scripts_path}}', '.github/skills/impeccable/scripts')
+    .replaceAll('{{command_hint}}', 'command')
+    .replaceAll('{{command_prefix}}', '/');
+  const vscode = rewriteVSCodeMarkdown(vscodeSource, { isSkillEntrypoint: true });
+  assert.match(vscode, /透過本 Skill 的\[啟動器\]/);
+  assert.doesNotMatch(vscode, /只有執行時無法報告基目錄時才使用/);
+});
+
 test('Chinese behavior evaluation scenarios are frozen and routable', () => {
   const suitePath = path.join(projectRoot, 'tests/localization-evals/zh-CN/scenarios.json');
   const suite = JSON.parse(fs.readFileSync(suitePath, 'utf8'));
@@ -155,6 +202,29 @@ test('Chinese behavior evaluation scenarios are frozen and routable', () => {
     assert.ok(scenario.requiredReferences.length >= 1, `${scenario.id}: needs an objective reference-loading gate`);
     for (const fixture of scenario.fixtures) {
       assert.ok(fs.existsSync(path.join(projectRoot, 'tests/localization-evals/zh-CN', fixture)), `${scenario.id}: missing ${fixture}`);
+    }
+  }
+});
+
+test('Traditional Chinese behavior evaluation scenarios are frozen and routable', () => {
+  const suiteRoot = path.join(projectRoot, 'tests/localization-evals/zh-TW');
+  const suite = JSON.parse(fs.readFileSync(path.join(suiteRoot, 'scenarios.json'), 'utf8'));
+  const skill = fs.readFileSync(path.join(projectRoot, 'locales/zh-TW/skill/SKILL.src.md'), 'utf8');
+  const commandRows = new Set(
+    [...skill.matchAll(/^\| `([a-z][a-z-]*)(?: [^`]*)?` \|/gm)].map((match) => match[1]),
+  );
+
+  assert.equal(suite.schemaVersion, 1);
+  assert.equal(suite.locale, 'zh-TW');
+  assert.equal(suite.scenarios.length, 4);
+  assert.equal(new Set(suite.scenarios.map((scenario) => scenario.id)).size, suite.scenarios.length);
+  for (const scenario of suite.scenarios) {
+    assert.match(scenario.id, /^zh-tw-[a-z0-9-]+$/);
+    assert.ok(commandRows.has(scenario.command), `${scenario.id}: unknown command ${scenario.command}`);
+    assert.ok(scenario.must.length >= 3);
+    assert.ok(scenario.mustNot.length >= 2);
+    for (const fixture of scenario.fixtures) {
+      assert.ok(fs.existsSync(path.join(suiteRoot, fixture)), `${scenario.id}: missing ${fixture}`);
     }
   }
 });

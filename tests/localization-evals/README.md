@@ -1,6 +1,6 @@
 # 中文行为评测
 
-本目录保存可提交的评测规范与合成 fixture。真实模型轨迹写入被 `.gitignore` 排除的 `evals/zh-CN/runs/`，避免把潜在敏感输出或大体积轨迹直接提交。
+本目录保存简体中文与繁體中文的可提交评测规范和合成 fixture。真实模型轨迹写入被 `.gitignore` 排除的 `evals/<locale>/runs/`，避免把潜在敏感输出或大体积轨迹直接提交。
 
 ## 1. 前置条件
 
@@ -27,6 +27,15 @@ npm run localization:eval:run -- \
 npm run localization:eval:run -- --model=claude-sonnet-5
 ```
 
+繁體中文评测显式指定 locale：
+
+```bash
+npm run localization:eval:run -- \
+  --locale=zh-TW \
+  --model=claude-sonnet-5 \
+  --scenario=zh-tw-typeset-finance-dashboard
+```
+
 支持的凭证名称与上游 harness 一致：`ANTHROPIC_API_KEY`、`OPENAI_API_KEY`、`GOOGLE_CLOUD_API_KEY`、`DEEPSEEK_API_KEY`。执行前应核对模型名称、价格和调用权限。
 
 每个输出结果最初都将 criteria 标记为 `unscored`，因此不能直接通过评分。
@@ -50,6 +59,8 @@ npm run localization:eval:run -- --model=claude-sonnet-5
 npm run localization:eval:score -- \
   --results=evals/zh-CN/runs/<run>.json
 ```
+
+评分器会从结果文件的 `locale` 自动选择 `zh-CN` 或 `zh-TW` 冻结场景。
 
 只有以下条件全部满足才返回成功：
 

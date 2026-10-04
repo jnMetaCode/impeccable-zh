@@ -75,6 +75,7 @@
     "localization:test": "node --test tests/localization.test.mjs",
     "localization:e2e:install": "node tests/localization-install-e2e.mjs",
     "localization:build": "node scripts/localization/build.mjs",
+    "localization:build:zh-TW": "node scripts/localization/build.mjs --locale zh-TW",
     "localization:check": "node scripts/localization/check.mjs",
     "localization:compose": "node scripts/localization/compose.mjs",
     "localization:report": "node scripts/localization/report.mjs",

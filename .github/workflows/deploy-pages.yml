@@ -6,7 +6,7 @@ on:
     paths:
       - "web/**"
       - "scripts/web/**"
-      - "locales/zh-CN/source-map.json"
+      - "locales/*/source-map.json"
       - "skill/scripts/command-metadata.json"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:

@@ -92,6 +92,13 @@ jobs:
       - name: Build localized provider bundles
         run: bun run localization:build
 
+      - name: Build Traditional Chinese provider bundles
+        run: bun run localization:build:zh-TW
+
+      - name: Restore Simplified Chinese bundles for install E2E
+        if: matrix.node-version == 24
+        run: bun run localization:build
+
       - name: Test and build the Chinese web app
         run: bun run web:test && bun run web:build
 

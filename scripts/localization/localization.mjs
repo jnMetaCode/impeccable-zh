@@ -4,6 +4,14 @@ import path from 'node:path';
 
 export const projectRoot = path.resolve(import.meta.dirname, '../..');
 
+export function availableLocales(root = projectRoot) {
+  const localesDir = path.join(root, 'locales');
+  return fs.readdirSync(localesDir, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && fs.existsSync(path.join(localesDir, entry.name, 'source-map.json')))
+    .map((entry) => entry.name)
+    .sort();
+}
+
 function readJson(file) {
   return JSON.parse(fs.readFileSync(file, 'utf8'));
 }
@@ -49,11 +57,15 @@ function translatableSources(root) {
   return files.sort();
 }
 
-export function validateLocalization(root = projectRoot) {
+export function validateLocalization(root = projectRoot, locale = 'zh-CN') {
+  const localeRoot = path.join(root, 'locales', locale);
   const lock = readJson(path.join(root, 'upstream-lock.json'));
-  const map = readJson(path.join(root, 'locales/zh-CN/source-map.json'));
-  const extensions = readJson(path.join(root, 'extensions-cn/manifest.json'));
-  const policy = readJson(path.join(root, 'locales/zh-CN/coverage-policy.json'));
+  const map = readJson(path.join(localeRoot, 'source-map.json'));
+  const extensionManifest = map.extensionsManifest || 'extensions-cn/manifest.json';
+  const extensions = readJson(path.join(root, extensionManifest));
+  const policy = readJson(path.join(localeRoot, 'coverage-policy.json'));
+  const terminologyPolicyPath = path.join(localeRoot, 'terminology-policy.json');
+  const terminologyPolicy = fs.existsSync(terminologyPolicyPath) ? readJson(terminologyPolicyPath) : null;
   const errors = [];
   const rows = [];
   const mappedSources = new Set();
@@ -61,7 +73,7 @@ export function validateLocalization(root = projectRoot) {
   const extensionOutputs = new Set();
 
   if (!/^[0-9a-f]{40}$/.test(lock.commit)) errors.push('upstream-lock.json: commit must be a 40-character SHA');
-  if (map.locale !== 'zh-CN') errors.push(`source-map.json: expected locale zh-CN, found ${map.locale}`);
+  if (map.locale !== locale) errors.push(`source-map.json: expected locale ${locale}, found ${map.locale}`);
 
   for (const entry of map.entries) {
     if (mappedSources.has(entry.source)) errors.push(`${entry.source}: duplicate source-map entry`);
@@ -134,8 +146,9 @@ export function validateLocalization(root = projectRoot) {
     if (extensionOutputs.has(entry.output)) errors.push(`${entry.output}: duplicate extension output`);
     extensionSources.add(entry.source);
     extensionOutputs.add(entry.output);
-    if (!entry.source.startsWith('extensions-cn/') || path.extname(entry.source) !== '.md') {
-      errors.push(`${entry.source}: extension source must be a Markdown file under extensions-cn/`);
+    const localeExtensionRoot = `locales/${locale}/extensions/`;
+    if ((!entry.source.startsWith('extensions-cn/') && !entry.source.startsWith(localeExtensionRoot)) || path.extname(entry.source) !== '.md') {
+      errors.push(`${entry.source}: extension source must be a Markdown file under extensions-cn/ or ${localeExtensionRoot}`);
     }
     if (path.isAbsolute(entry.output) || entry.output.split('/').includes('..')) {
       errors.push(`${entry.source}: extension output must stay inside the composed Skill`);
@@ -159,6 +172,21 @@ export function validateLocalization(root = projectRoot) {
     }
   }
 
+  if (terminologyPolicy) {
+    if (terminologyPolicy.schemaVersion !== 1) errors.push(`terminology-policy.json: unsupported schemaVersion ${terminologyPolicy.schemaVersion}`);
+    const localizedFiles = [
+      ...map.entries.map((entry) => entry.localized),
+      ...extensions.entries.map((entry) => entry.source),
+    ];
+    for (const file of localizedFiles) {
+      if (!fs.existsSync(path.join(root, file))) continue;
+      const content = fs.readFileSync(path.join(root, file), 'utf8');
+      for (const term of terminologyPolicy.forbiddenTerms || []) {
+        if (content.includes(term)) errors.push(`${file}: forbidden ${terminologyPolicy.variant} term ${term}`);
+      }
+    }
+  }
+
   const tracked = translatableSources(root);
   const untranslated = tracked.filter((source) => !mappedSources.has(source));
   const unexpected = [...mappedSources].filter((source) => !tracked.includes(source));
@@ -172,11 +200,11 @@ export function validateLocalization(root = projectRoot) {
     unexpected,
   };
 
-  return { lock, map, extensions, policy, coverage, rows, errors };
+  return { lock, map, extensions, policy, terminologyPolicy, coverage, rows, errors };
 }
 
-export function composeLocalization(outDir, root = projectRoot) {
-  const result = validateLocalization(root);
+export function composeLocalization(outDir, root = projectRoot, locale = 'zh-CN') {
+  const result = validateLocalization(root, locale);
   if (result.errors.length > 0) throw new Error(result.errors.join('\n'));
 
   const skillDir = path.join(root, 'skill');

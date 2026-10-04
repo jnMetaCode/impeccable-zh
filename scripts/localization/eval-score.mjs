@@ -97,8 +97,9 @@ function flagValue(name) {
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const resultsPath = flagValue('--results');
   if (!resultsPath) throw new Error('Usage: eval-score.mjs --results=<run.json> [--json]');
-  const suite = JSON.parse(fs.readFileSync(path.join(projectRoot, 'tests/localization-evals/zh-CN/scenarios.json'), 'utf8'));
   const run = JSON.parse(fs.readFileSync(path.resolve(resultsPath), 'utf8'));
+  if (!['zh-CN', 'zh-TW'].includes(run.locale)) throw new Error(`Unsupported result locale: ${run.locale}`);
+  const suite = JSON.parse(fs.readFileSync(path.join(projectRoot, 'tests/localization-evals', run.locale, 'scenarios.json'), 'utf8'));
   const report = scoreEvaluation(suite, run);
   if (process.argv.includes('--json')) console.log(JSON.stringify(report, null, 2));
   else {

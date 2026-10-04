@@ -5,6 +5,13 @@ import test from 'node:test';
 import { fileURLToPath } from 'node:url';
 
 import { commandText, commands, installSteps, project, providers } from '../web/catalog.js';
+import {
+  commandText as traditionalCommandText,
+  commands as traditionalCommands,
+  installSteps as traditionalInstallSteps,
+  project as traditionalProject,
+  providers as traditionalProviders,
+} from '../web/catalog.zh-TW.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -17,6 +24,17 @@ test('web catalog stays aligned with localization and command sources', () => {
   assert.equal(new Set(commands.map((command) => command.name)).size, commands.length);
   assert.deepEqual(commands.map((command) => command.name).sort(), Object.keys(metadata).sort());
   assert.equal(sourceMap.entries.length, project.total);
+});
+
+test('Traditional Chinese web catalog mirrors all supported capabilities', () => {
+  const sourceMap = JSON.parse(fs.readFileSync(path.join(root, 'locales/zh-TW/source-map.json'), 'utf8'));
+  assert.equal(traditionalProviders.length, providers.length);
+  assert.equal(traditionalCommands.length, commands.length);
+  assert.deepEqual(traditionalCommands.map((command) => command.name), commands.map((command) => command.name));
+  assert.equal(traditionalProject.total, project.total);
+  assert.equal(sourceMap.entries.length, traditionalProject.total);
+  assert.match(traditionalInstallSteps('codex')[2], /localization:build:zh-TW/);
+  assert.match(traditionalCommandText(traditionalCommands[0]), /^\/impeccable init/);
 });
 
 test('install planner emits auditable source-build steps for every provider', () => {
@@ -51,4 +69,21 @@ test('web page has the accessibility and responsive contracts', () => {
   assert.match(html, /它不是客户案例/);
   assert.match(css, /@media \(max-width: 620px\)/);
   assert.match(css, /prefers-reduced-motion/);
+});
+
+test('Traditional Chinese page has language, navigation, and accessibility contracts', () => {
+  const html = fs.readFileSync(path.join(root, 'web/zh-TW/index.html'), 'utf8');
+  assert.match(html, /<html lang="zh-TW">/);
+  assert.match(html, /hreflang="zh-CN"/);
+  assert.match(html, /hreflang="zh-TW"/);
+  assert.match(html, /href="\.\.\/" lang="zh-CN">简体<\/a>/);
+  assert.match(html, /role="status" aria-live="polite"/);
+  assert.match(html, /繁體中文/);
+  assert.match(html, /CASE-STUDY\.zh-TW\.md/);
+});
+
+test('local preview resolves locale directory URLs to their index pages', () => {
+  const server = fs.readFileSync(path.join(root, 'scripts/web/serve.mjs'), 'utf8');
+  assert.match(server, /pathname\.endsWith\('\/'\)/);
+  assert.match(server, /index\.html/);
 });

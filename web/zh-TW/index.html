@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Impeccable 中文社群增強版：為 19 種 AI 程式設計工具提供完整中文設計指導。">
+  <link rel="alternate" hreflang="zh-CN" href="https://jnmetacode.github.io/impeccable-zh/">
+  <link rel="alternate" hreflang="zh-TW" href="https://jnmetacode.github.io/impeccable-zh/zh-TW/">
+  <title>Impeccable 中文版 · 讓 AI 真正懂中文產品設計</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='8' fill='%23d54c28'/%3E%3Ctext x='32' y='44' text-anchor='middle' font-size='38' fill='%23f4f0e7'%3E今%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要內容</a>
+  <div class="page-shell">
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="Impeccable 中文版首頁">
+        <span class="brand-mark" aria-hidden="true">今</span>
+        <span><b>Impeccable</b><small>中文社群增強版</small></span>
+      </a>
+      <nav aria-label="主導航">
+        <a href="#install">安裝</a>
+        <a href="#commands">命令</a>
+        <a href="#case">案例</a>
+        <a href="#chinese">中文增強</a>
+        <a class="nav-locale" href="../" lang="zh-CN">简体</a>
+        <a class="nav-github" href="https://github.com/jnMetaCode/impeccable-zh">GitHub ↗</a>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> Alpha · 100% 核心內容覆蓋</p>
+          <h1>讓 AI 不止會寫介面，<em>還懂中文產品。</em></h1>
+          <p class="hero-lead">完整在地化 Impeccable 的設計工作流，並針對中文排版、UX 文案與中國大陸常用 UI 框架補上關鍵語境。一次安裝，串接你正在使用的 AI 程式設計工具。</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#install">產生安裝步驟</a>
+            <a class="button button-secondary" href="#commands">瀏覽 24 個命令</a>
+          </div>
+          <p class="alpha-note">非官方社群衍生版 · 目前建議從原始碼建置</p>
+        </div>
+        <aside class="hero-panel" aria-label="專案狀態">
+          <div class="seal"><span>繁體中文</span><strong>43 / 43</strong><small>核心原始檔</small></div>
+          <div class="status-grid">
+            <div><strong data-project-value="buildTargets">19</strong><span>建置目標</span></div>
+            <div><strong data-project-value="commands">24</strong><span>設計命令</span></div>
+            <div><strong data-project-value="rules">61</strong><span>偵測規則</span></div>
+            <div><strong>3</strong><span>中文增強</span></div>
+          </div>
+          <p><i aria-hidden="true"></i> 鎖定上游 <code>0d6b47e</code>，逐檔案漂移檢查</p>
+        </aside>
+      </section>
+
+      <section class="section install-section" id="install">
+        <div class="section-heading">
+          <p class="kicker">01 · 安裝指南</p>
+          <h2>選擇你的 AI 程式設計工具</h2>
+          <p>安裝指南採用 Git submodule，團隊可以審查版本、固定提交，並隨專案一起更新。</p>
+        </div>
+        <div class="installer">
+          <div class="provider-column">
+            <p class="field-label">建置目標 <span>共 19 種</span></p>
+            <div class="provider-list" data-provider-list></div>
+          </div>
+          <div class="terminal-card">
+            <div class="terminal-topbar">
+              <span><i></i><i></i><i></i></span>
+              <p>安裝到目前專案 · <b data-selected-provider>Claude Code</b></p>
+              <button type="button" data-copy-target="[data-install-code]" data-copy-label="安裝步驟">複製全部</button>
+            </div>
+            <pre class="install-code" data-install-code></pre>
+            <div class="terminal-footer">
+              <span>完成後重新載入 AI 工具</span>
+              <code>/impeccable init</code>
+            </div>
+          </div>
+        </div>
+        <div class="notice"><strong>Alpha 提示</strong><span>目前沒有穩定釋出包；指南會從原始碼建置中文發行產物。安裝前請確保 Node.js 22.18+，建議同時安裝 Bun。</span></div>
+      </section>
+
+      <section class="section chinese-section" id="chinese">
+        <div class="section-heading compact">
+          <p class="kicker">02 · 中文增強</p>
+          <h2>翻譯只是起點，語境才是能力</h2>
+        </div>
+        <div class="feature-grid">
+          <article><span class="feature-no">壹</span><h3>中文排版</h3><p>字重、行高、標點擠壓、數字與中文混排、觸控目標及無障礙，不照搬西文參數。</p><code>typeset · layout · adapt</code></article>
+          <article><span class="feature-no">貳</span><h3>中文 UX 文案</h3><p>處理按鈕、錯誤、空狀態、確認與風險提示，讓文案簡潔、自然且符合華語產品習慣。</p><code>clarify · onboard · harden</code></article>
+          <article><span class="feature-no">叄</span><h3>中國大陸 UI 框架</h3><p>覆蓋 Ant Design、Element Plus、TDesign、Arco Design 等常見體系的調整判斷。</p><code>craft · shape · audit</code></article>
+        </div>
+      </section>
+
+      <section class="section case-section" id="case">
+        <div class="section-heading">
+          <p class="kicker">03 · 示範案例</p>
+          <h2>從“能填”到“願意填”的中文表單</h2>
+          <p>基於儲存庫 Element Plus 測試夾具的可重現示範。它不是客戶案例，也不使用虛構的業務提升資料。</p>
+        </div>
+        <div class="case-stage">
+          <article class="case-pane case-before">
+            <div class="case-label"><span>改進前</span><small>框架預設值直接上線</small></div>
+            <div class="mock-window">
+              <p class="mock-title">完善企業認證資訊</p>
+              <label>企業法定全稱<input value="上海示例數字科技有限責任公司" readonly></label>
+              <label>業務聯絡人及所屬部門<input value="陳小明 / 數字化產品與客戶成功部" readonly></label>
+              <p class="mock-help">提交後不可修改請仔細核對以上所有資料是否準確完整</p>
+              <div class="mock-actions"><button type="button">取消</button><button type="button">提交認證</button></div>
+            </div>
+            <ul><li>中文標籤與輸入內容爭搶寬度</li><li>操作層級不清，幫助文字難讀</li><li>未覆蓋手機和超長內容</li></ul>
+          </article>
+          <div class="case-flow" aria-label="使用的命令"><code>audit</code><span>→</span><code>typeset</code><span>→</span><code>adapt</code><span>→</span><code>polish</code></div>
+          <article class="case-pane case-after">
+            <div class="case-label"><span>改進目標</span><small>中文語境 + 狀態完整性</small></div>
+            <div class="mock-window improved">
+              <p class="mock-step">企業認證 · 第 2 / 3 步</p>
+              <p class="mock-title">核對企業資訊</p>
+              <label>企業全稱<input value="上海示例數字科技有限責任公司" readonly></label>
+              <label>聯絡人<input value="陳小明" readonly></label>
+              <p class="mock-help">提交後仍可由管理員發起資料變更。</p>
+              <div class="mock-actions"><button type="button">返回上一步</button><button type="button">確認並繼續</button></div>
+            </div>
+            <ul><li>320px 寬度無橫向滾動或裁切</li><li>觸控目標至少 44×44 CSS px</li><li>主次動作、風險和恢復路徑明確</li></ul>
+          </article>
+        </div>
+        <p class="case-link"><a href="https://github.com/jnMetaCode/impeccable-zh/blob/main/docs/CASE-STUDY.zh-TW.md">檢視輸入夾具、評測門禁與完整重現步驟 →</a></p>
+      </section>
+
+      <section class="section commands-section" id="commands">
+        <div class="section-heading command-heading">
+          <div><p class="kicker">04 · 命令手冊</p><h2>從一句話開始改進設計</h2></div>
+          <p>所有能力都透過一個入口呼叫：<code>/impeccable &lt;命令&gt; &lt;目標&gt;</code></p>
+        </div>
+        <div class="command-tools">
+          <label class="search-field"><span aria-hidden="true">⌕</span><span class="sr-only">搜尋命令</span><input type="search" placeholder="搜尋：排版、稽核、動效…" data-command-search></label>
+          <label class="category-field"><span class="sr-only">按分類篩選</span><select data-command-category><option value="">全部分類</option></select></label>
+          <p data-command-count>顯示 24 / 24 條命令</p>
+        </div>
+        <div class="command-list" data-command-list></div>
+      </section>
+
+      <section class="closing-section">
+        <p class="kicker">準備開始</p>
+        <h2>先讓 AI 理解產品，再讓它動手。</h2>
+        <div><a class="button button-primary" href="#install">選擇工具並安裝</a><a class="text-link" href="https://github.com/jnMetaCode/impeccable-zh/blob/main/README.zh-TW.md">閱讀專案文件 →</a></div>
+      </section>
+    </main>
+
+    <footer><p>Impeccable 中文社群增強版 · Apache-2.0</p><p>基於 <a href="https://github.com/pbakaus/impeccable">pbakaus/impeccable</a>，與上游作者無官方隸屬關係。</p></footer>
+  </div>
+  <p class="copy-status" role="status" aria-live="polite" data-copy-status></p>
+  <script type="module" src="../app.js"></script>
+</body>
+</html>

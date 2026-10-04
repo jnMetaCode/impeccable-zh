@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "entries": [
+    {
+      "source": "locales/zh-TW/extensions/references/chinese-typeset.md",
+      "output": "reference/chinese-typeset-cn.md",
+      "commands": ["typeset"]
+    },
+    {
+      "source": "locales/zh-TW/extensions/references/chinese-ux-copy.md",
+      "output": "reference/chinese-ux-copy-cn.md",
+      "commands": ["clarify", "harden"]
+    },
+    {
+      "source": "locales/zh-TW/extensions/references/china-ui-frameworks.md",
+      "output": "reference/china-ui-frameworks-cn.md",
+      "commands": ["craft", "shape", "adapt", "audit", "polish"]
+    }
+  ]
+}
