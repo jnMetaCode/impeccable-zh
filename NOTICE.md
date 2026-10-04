@@ -9,3 +9,14 @@ The `skill/reference/ios.md` and `skill/reference/android.md` platform reference
 **Original work:** https://github.com/ehmo/platform-design-skills
 **Original license:** MIT
 **Author:** ehmo
+
+## Impeccable Chinese Community Extensions
+
+The `extensions-cn/` content includes material restructured from
+jnMetaCode's `ai-ui-design` project at commit
+`5e5dafcbaa201266b487b988139587ebd64e4cc0`, originally distributed under
+the MIT License.
+
+**Original work:** https://github.com/jnMetaCode/ai-ui-design
+**Original license:** MIT
+**Copyright:** 2025 jnMetaCode

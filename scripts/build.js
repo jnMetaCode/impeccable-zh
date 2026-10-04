@@ -695,8 +695,12 @@ async function build() {
   // or download; the root ENGINE_VERSION file is the source of truth for it.
   syncEngineVersionFile(ROOT_DIR);
 
-  // Read source files (unified skills architecture)
-  const { skills } = readSourceFiles(ROOT_DIR);
+  // Read source files (unified skills architecture). Downstream locale builds
+  // may point this at a composed source tree without rewriting skill/ in place.
+  const skillSourceDir = process.env.IMPECCABLE_SKILL_SOURCE_DIR
+    ? path.resolve(process.env.IMPECCABLE_SKILL_SOURCE_DIR)
+    : path.join(ROOT_DIR, 'skill');
+  const { skills } = readSourceFiles(ROOT_DIR, skillSourceDir);
   const patterns = readPatterns(ROOT_DIR);
   const userInvocableCount = skills.filter(s => s.userInvocable).length;
   console.log(`📖 Read ${skills.length} skills (${userInvocableCount} user-invocable) and ${patterns.patterns.length + patterns.antipatterns.length} pattern categories\n`);

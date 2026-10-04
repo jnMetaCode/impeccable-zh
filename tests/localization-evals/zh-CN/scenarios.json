@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "locale": "zh-CN",
+  "upstreamCommit": "0d6b47ea19b63afe15e3f93a44d5d9fbbc6fd275",
+  "scenarios": [
+    {
+      "id": "zh-init-b2b-saas",
+      "command": "init",
+      "title": "中文 B2B SaaS 产品上下文初始化",
+      "prompt": "为这个面向连锁门店的库存协同 SaaS 初始化产品设计上下文。主要用户是区域运营和门店店长，核心任务是发现缺货风险并完成跨店调拨。不要修改业务代码。",
+      "fixtures": [
+        "fixtures/init-b2b-saas/README.md"
+      ],
+      "requiredReferences": ["init.md"],
+      "must": [
+        "读取仓库证据后再形成产品结论",
+        "生成或更新 PRODUCT.md",
+        "记录用户、核心任务、产品边界和待确认事实",
+        "把没有证据的内容标记为假设或问题",
+        "不修改应用源代码"
+      ],
+      "mustNot": [
+        "虚构已经存在的客户数据或业务指标",
+        "在没有请求时生成 DESIGN.md",
+        "把产品初始化误路由为视觉重设计"
+      ]
+    },
+    {
+      "id": "zh-typeset-finance-dashboard",
+      "command": "typeset",
+      "title": "中文金融仪表盘排版",
+      "prompt": "优化这个资金看板的中文排版。页面包含人民币金额、同比百分比、精确到分钟的交易时间，以及中英文混排的产品名称。保持现有品牌颜色和功能不变。",
+      "fixtures": [
+        "fixtures/typeset-finance-dashboard/index.html"
+      ],
+      "requiredReferences": ["typeset.md", "chinese-typeset-cn.md"],
+      "must": [
+        "应用中文字体回退和中文行高规则",
+        "处理中文标点避头尾和中英文混排",
+        "使用 locale formatter 表达金额、百分比和时间",
+        "保持既有品牌颜色、文案事实和交互行为",
+        "检查窄屏文本换行和数字列对齐"
+      ],
+      "mustNot": [
+        "用字符串拼接格式化人民币金额",
+        "把 1.2k 或 3m 直接作为正式中文金额",
+        "借排版优化之名重做整套视觉体系"
+      ]
+    },
+    {
+      "id": "zh-harden-destructive-action",
+      "command": "harden",
+      "title": "高风险删除与恢复路径加固",
+      "prompt": "加固成员管理页的删除成员流程以及加载、空状态和失败状态。删除会立即撤销权限，但 7 天内管理员可以恢复。",
+      "fixtures": [
+        "fixtures/harden-destructive-action/README.md"
+      ],
+      "requiredReferences": ["harden.md", "chinese-ux-copy-cn.md"],
+      "must": [
+        "确认文案明确操作对象、立即影响、可恢复期限和恢复路径",
+        "区分首次为空、筛选无结果、无权限和加载失败",
+        "错误信息说明发生了什么以及用户下一步能做什么",
+        "补齐键盘操作、焦点恢复和屏幕阅读器反馈",
+        "验证重复提交和请求超时不会产生错误状态"
+      ],
+      "mustNot": [
+        "使用只有是否按钮的模糊确认框",
+        "所有空状态都显示暂无数据",
+        "向用户直接展示异常堆栈"
+      ]
+    },
+    {
+      "id": "zh-adapt-element-plus-form",
+      "command": "adapt",
+      "title": "Element Plus 中文表单窄屏适配",
+      "prompt": "把这个 Element Plus 客户资料表单适配到 360px 宽度，同时保留桌面端密度。修复中文长标签、日期 locale、校验信息和弹层问题，不替换组件库。",
+      "fixtures": [
+        "fixtures/adapt-element-plus-form/package.json",
+        "fixtures/adapt-element-plus-form/App.vue"
+      ],
+      "requiredReferences": ["adapt.md", "china-ui-frameworks-cn.md"],
+      "must": [
+        "从依赖和组件标签识别 Element Plus 与 Vue 3",
+        "读取中国 UI 框架适配引用并保留现有组件库",
+        "通过 ElConfigProvider 或现有全局入口统一中文 locale",
+        "在窄屏为中文长标签选择可读的表单布局",
+        "验证日期组件 locale、错误文本、弹层和 200% 缩放"
+      ],
+      "mustNot": [
+        "引入第二套组件库",
+        "通过缩小字号容纳长标签",
+        "使用深层选择器和 important 批量覆盖内部结构"
+      ]
+    }
+  ]
+}

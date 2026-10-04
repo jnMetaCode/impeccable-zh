@@ -1,0 +1,307 @@
+{
+  "schemaVersion": 1,
+  "locale": "zh-CN",
+  "entries": [
+    {
+      "source": "skill/SKILL.src.md",
+      "localized": "locales/zh-CN/skill/SKILL.src.md",
+      "output": "skill/SKILL.src.md",
+      "sourceBlob": "3b9fe0d1421c3d51968aafd242366655ff89a242",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/routing.md",
+      "localized": "locales/zh-CN/skill/reference/routing.md",
+      "output": "skill/reference/routing.md",
+      "sourceBlob": "fb35adc46a200ce09f3efbfdc9ae87b3a5be123f",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/typeset.md",
+      "localized": "locales/zh-CN/skill/reference/typeset.md",
+      "output": "skill/reference/typeset.md",
+      "sourceBlob": "a315599ca7ec821ba513b3181ad1bf9043b9218e",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/init.md",
+      "localized": "locales/zh-CN/skill/reference/init.md",
+      "output": "skill/reference/init.md",
+      "sourceBlob": "ac3880b862e3dfc5d170a47b27e5ecd9c01e8cff",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/harden.md",
+      "localized": "locales/zh-CN/skill/reference/harden.md",
+      "output": "skill/reference/harden.md",
+      "sourceBlob": "e8a0567c5964ab154a726a2e53ea2b6563b780d5",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/clarify.md",
+      "localized": "locales/zh-CN/skill/reference/clarify.md",
+      "output": "skill/reference/clarify.md",
+      "sourceBlob": "309a056793ff912ff7b412f797a5ecc643d36cc9",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/craft.md",
+      "localized": "locales/zh-CN/skill/reference/craft.md",
+      "output": "skill/reference/craft.md",
+      "sourceBlob": "dbbc9402c07cdab21f2b6eb69279b8435fecfd7f",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/operate.md",
+      "localized": "locales/zh-CN/skill/reference/operate.md",
+      "output": "skill/reference/operate.md",
+      "sourceBlob": "5e4666de08f63f55c832c7bb2511cc9ad8068744",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/polish.md",
+      "localized": "locales/zh-CN/skill/reference/polish.md",
+      "output": "skill/reference/polish.md",
+      "sourceBlob": "f2146990505863574e3c8298613a37d4c31ee73c",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/onboard.md",
+      "localized": "locales/zh-CN/skill/reference/onboard.md",
+      "output": "skill/reference/onboard.md",
+      "sourceBlob": "e6f835b46209087e6801f449160f7569c0efe713",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/shape.md",
+      "localized": "locales/zh-CN/skill/reference/shape.md",
+      "output": "skill/reference/shape.md",
+      "sourceBlob": "90a74ae813331cbce8fff6beb498ced77970fadf",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/extract.md",
+      "localized": "locales/zh-CN/skill/reference/extract.md",
+      "output": "skill/reference/extract.md",
+      "sourceBlob": "0f49cfbaa0f6787b0f3b2e5e89980f88fe06af7c",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/delight.md",
+      "localized": "locales/zh-CN/skill/reference/delight.md",
+      "output": "skill/reference/delight.md",
+      "sourceBlob": "952af09711345b28fb54aa1d335eed6cf38f86a5",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/layout.md",
+      "localized": "locales/zh-CN/skill/reference/layout.md",
+      "output": "skill/reference/layout.md",
+      "sourceBlob": "4b9eadcb10bbcf3e4d8de84ebd0d86d90e804d4b",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/colorize.md",
+      "localized": "locales/zh-CN/skill/reference/colorize.md",
+      "output": "skill/reference/colorize.md",
+      "sourceBlob": "ba536574aa86bfb08cd47dc0a80313692800a53d",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/animate.md",
+      "localized": "locales/zh-CN/skill/reference/animate.md",
+      "output": "skill/reference/animate.md",
+      "sourceBlob": "f80ebd154cd0b51ac713f3a535ca9640a30ab966",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/bolder.md",
+      "localized": "locales/zh-CN/skill/reference/bolder.md",
+      "output": "skill/reference/bolder.md",
+      "sourceBlob": "e06aa32121b7de5b21c7bd83f3be1ec851ffa7a5",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/quieter.md",
+      "localized": "locales/zh-CN/skill/reference/quieter.md",
+      "output": "skill/reference/quieter.md",
+      "sourceBlob": "8483d305d781885f549cb104346f534331d2ba8d",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/adapt.native.md",
+      "localized": "locales/zh-CN/skill/reference/adapt.native.md",
+      "output": "skill/reference/adapt.native.md",
+      "sourceBlob": "4307b559f458f01c0ba50da83b7467656b596970",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/ios.md",
+      "localized": "locales/zh-CN/skill/reference/ios.md",
+      "output": "skill/reference/ios.md",
+      "sourceBlob": "bff06b2a3ccd029930be7df19794bb20aa02be26",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/android.md",
+      "localized": "locales/zh-CN/skill/reference/android.md",
+      "output": "skill/reference/android.md",
+      "sourceBlob": "a04ba29b547810d30e5f9d029ae1b39a9872a798",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/audit.native.md",
+      "localized": "locales/zh-CN/skill/reference/audit.native.md",
+      "output": "skill/reference/audit.native.md",
+      "sourceBlob": "9a51dd8a24aaf54e5c75affbf14ae0ba2e07beee",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/region-map.md",
+      "localized": "locales/zh-CN/skill/reference/region-map.md",
+      "output": "skill/reference/region-map.md",
+      "sourceBlob": "de8c5c1f8d6c24593af38980deb4c3032571bd64",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/component-review.md",
+      "localized": "locales/zh-CN/skill/reference/component-review.md",
+      "output": "skill/reference/component-review.md",
+      "sourceBlob": "9f7dc1d9f1d76b4f45ad39588ac862275a9addec",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/doctor.md",
+      "localized": "locales/zh-CN/skill/reference/doctor.md",
+      "output": "skill/reference/doctor.md",
+      "sourceBlob": "f274cdbb4b5a4a004f432aac2e9269156a83e634",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/craft-floor.md",
+      "localized": "locales/zh-CN/skill/reference/craft-floor.md",
+      "output": "skill/reference/craft-floor.md",
+      "sourceBlob": "d7a3aecc7d091c260a599b5de83fccb3bdaf29f4",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/audit.md",
+      "localized": "locales/zh-CN/skill/reference/audit.md",
+      "output": "skill/reference/audit.md",
+      "sourceBlob": "cb3483b736cfc21e670f62cc5778267e7864a6b0",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/distill.md",
+      "localized": "locales/zh-CN/skill/reference/distill.md",
+      "output": "skill/reference/distill.md",
+      "sourceBlob": "bc0f6e96472be319e27e62e681975d3716e7b43a",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/overdrive.md",
+      "localized": "locales/zh-CN/skill/reference/overdrive.md",
+      "output": "skill/reference/overdrive.md",
+      "sourceBlob": "474100a3043084ac187217edb6ffe9815f8b344f",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/optimize.md",
+      "localized": "locales/zh-CN/skill/reference/optimize.md",
+      "output": "skill/reference/optimize.md",
+      "sourceBlob": "9c7bb144ab0d5fa72f5bbb20785249895b0998ba",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/live-setup.md",
+      "localized": "locales/zh-CN/skill/reference/live-setup.md",
+      "output": "skill/reference/live-setup.md",
+      "sourceBlob": "274f8c3bd091afcf49fc33aaba70edecc11acfbf",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/generate.md",
+      "localized": "locales/zh-CN/skill/reference/generate.md",
+      "output": "skill/reference/generate.md",
+      "sourceBlob": "7247104e9a1e743cf19ac0910d8788ef889cc6eb",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/live.md",
+      "localized": "locales/zh-CN/skill/reference/live.md",
+      "output": "skill/reference/live.md",
+      "sourceBlob": "5823d3407ebd4679ac3531eaa3008db798d9ed12",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/hooks.md",
+      "localized": "locales/zh-CN/skill/reference/hooks.md",
+      "output": "skill/reference/hooks.md",
+      "sourceBlob": "64e116cd65c29c2e6cb3eda2fc1bbbbdc7e047d6",
+      "status": "current"
+    },
+    {
+      "source": "skill/agents/impeccable-documenter.md",
+      "localized": "locales/zh-CN/skill/agents/impeccable-documenter.md",
+      "output": "skill/agents/impeccable-documenter.md",
+      "sourceBlob": "d2c4e107c8031e932bbdab6bb2cfb3efe0edd225",
+      "status": "current"
+    },
+    {
+      "source": "skill/agents/impeccable-asset-producer.md",
+      "localized": "locales/zh-CN/skill/agents/impeccable-asset-producer.md",
+      "output": "skill/agents/impeccable-asset-producer.md",
+      "sourceBlob": "5ba1386ebed7516eb67b1d46c61cfbd9d1a69f52",
+      "status": "current"
+    },
+    {
+      "source": "skill/agents/impeccable-manual-edit-applier.md",
+      "localized": "locales/zh-CN/skill/agents/impeccable-manual-edit-applier.md",
+      "output": "skill/agents/impeccable-manual-edit-applier.md",
+      "sourceBlob": "81fe9fd8170738e4f66c1831f654285a7582592b",
+      "status": "current"
+    },
+    {
+      "source": "skill/agents/impeccable-finish-reviewer.md",
+      "localized": "locales/zh-CN/skill/agents/impeccable-finish-reviewer.md",
+      "output": "skill/agents/impeccable-finish-reviewer.md",
+      "sourceBlob": "e7bfd66383b3a9a698eb304d3f245e479fac9e20",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/adapt.md",
+      "localized": "locales/zh-CN/skill/reference/adapt.md",
+      "output": "skill/reference/adapt.md",
+      "sourceBlob": "25a95fcf6f15093d904da416d18a9f795b9e757a",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/document.md",
+      "localized": "locales/zh-CN/skill/reference/document.md",
+      "output": "skill/reference/document.md",
+      "sourceBlob": "90b963b1a74a1e98848d200eafc1230b8e77e803",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/visualize.md",
+      "localized": "locales/zh-CN/skill/reference/visualize.md",
+      "output": "skill/reference/visualize.md",
+      "sourceBlob": "4f006d4a5ec39812539543073a7c2caabaf94317",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/critique.md",
+      "localized": "locales/zh-CN/skill/reference/critique.md",
+      "output": "skill/reference/critique.md",
+      "sourceBlob": "ad0831694497d99e455fe02d02ce526867b2eea0",
+      "status": "current"
+    },
+    {
+      "source": "skill/reference/new-work.md",
+      "localized": "locales/zh-CN/skill/reference/new-work.md",
+      "output": "skill/reference/new-work.md",
+      "sourceBlob": "c11977550517af168237c0cbbe95a21e0999dfe9",
+      "status": "current"
+    }
+  ]
+}

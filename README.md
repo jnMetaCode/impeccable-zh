@@ -1,5 +1,7 @@
 # Impeccable
 
+> [简体中文社区增强版说明](README.zh-CN.md)（Alpha 开发中，非官方衍生版）
+
 Design guidance for AI coding agents. 1 skill, 24 commands, live browser iteration, and 61 deterministic detector rules for AI-generated frontend design.
 
 > **Quick start:** From your project root, run `npx impeccable install`, then run `/impeccable init` inside your AI coding tool. Full docs: [impeccable.style](https://impeccable.style).

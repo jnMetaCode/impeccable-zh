@@ -1,0 +1,77 @@
+name: Upstream Sync Audit
+
+on:
+  schedule:
+    - cron: "23 2 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: upstream-sync-audit
+  cancel-in-progress: false
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository history
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+
+      - name: Fetch upstream main without tags
+        shell: bash
+        run: |
+          set -euo pipefail
+          if git remote get-url upstream >/dev/null 2>&1; then
+            git remote set-url upstream https://github.com/pbakaus/impeccable.git
+          else
+            git remote add upstream https://github.com/pbakaus/impeccable.git
+          fi
+          git fetch --no-tags --filter=blob:none upstream +main:refs/remotes/upstream/main
+
+      - name: Generate machine-readable audit
+        continue-on-error: true
+        run: node scripts/localization/sync-audit.mjs --target=upstream/main --json > upstream-sync-report.json
+
+      - name: Add audit summary
+        run: node scripts/localization/sync-audit-ci.mjs upstream-sync-report.json
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: upstream-sync-report
+          path: upstream-sync-report.json
+          retention-days: 30
+
+      - name: Detect whether review is required
+        id: review
+        run: node scripts/localization/sync-audit-ci.mjs upstream-sync-report.json --set-output
+
+      - name: Create or update the localization review issue
+        if: steps.review.outputs.required == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          ISSUE_TITLE: "[automation] Upstream localization review required"
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/localization/sync-audit-issue.mjs upstream-sync-report.json --output=upstream-sync-issue.md
+          issue_number="$(gh issue list --repo "$GH_REPO" --state open --search "$ISSUE_TITLE in:title" --json number,title --jq '[.[] | select(.title == "[automation] Upstream localization review required")][0].number // ""')"
+          if [ -n "$issue_number" ]; then
+            gh issue edit "$issue_number" --repo "$GH_REPO" --title "$ISSUE_TITLE" --body-file upstream-sync-issue.md
+          else
+            gh issue create --repo "$GH_REPO" --title "$ISSUE_TITLE" --body-file upstream-sync-issue.md
+          fi
+
+      - name: Require localization review when sources changed
+        run: node scripts/localization/sync-audit-ci.mjs upstream-sync-report.json --check

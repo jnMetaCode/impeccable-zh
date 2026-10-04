@@ -53,6 +53,12 @@ const SETUP_FALLBACK_TEXT =
 const SETUP_PLUGIN_TEXT =
   'Every `"${CLAUDE_SKILL_DIR}/scripts/impeccable" <verb>` command in this skill and its references resolves against that base directory. ' +
   'In reference files, replace the skill-base-dir placeholder with this directory before running commands; it is not a shell variable.';
+const SETUP_FALLBACK_TEXT_ZH =
+  '该目录用于解析本 Skill 及引用文件里的所有 `.claude/skills/impeccable/scripts/impeccable <verb>` 命令，' +
+  '只有运行时无法报告基目录时才使用 `.claude/skills/impeccable/scripts` 回退值。';
+const SETUP_PLUGIN_TEXT_ZH =
+  '本 Skill 及引用文件中的每条 `"${CLAUDE_SKILL_DIR}/scripts/impeccable" <verb>` 命令都以该基目录解析。' +
+  '在引用文件中，运行命令前将 skill-base-dir 占位符替换为此目录；它不是 shell 变量。';
 
 // Agent files are subagent system prompts: a spawned agent never loads
 // SKILL.md, so Setup's <skill-base-dir> token is undefined in the one
@@ -84,6 +90,7 @@ export function rewritePluginMarkdown(content, { isSkillEntrypoint = true } = {}
   return stripAllowedToolsFrontmatter(content)
     .replaceAll(PROJECT_ALLOWED_TOOLS_LINE, '')
     .replaceAll(SETUP_FALLBACK_TEXT, SETUP_PLUGIN_TEXT)
+    .replaceAll(SETUP_FALLBACK_TEXT_ZH, SETUP_PLUGIN_TEXT_ZH)
     .replaceAll(CLAUDE_PROJECT_SCRIPTS_PATH, isSkillEntrypoint ? PLUGIN_SCRIPTS_PATH : `${baseDir}/scripts`)
     .replaceAll('<skill-base-dir>', baseDir)
     // ${CLAUDE_SKILL_DIR} expands to a real path at load time, and an unquoted
@@ -157,7 +164,7 @@ export function verifyPluginAgentRewrite(agentPath) {
  */
 export function verifyPluginSkillRewrite(skillMdPath) {
   const content = fs.readFileSync(skillMdPath, 'utf-8');
-  if (!content.includes(SETUP_PLUGIN_TEXT)) {
+  if (!content.includes(SETUP_PLUGIN_TEXT) && !content.includes(SETUP_PLUGIN_TEXT_ZH)) {
     throw new Error(
       `Plugin rewrite drift: ${skillMdPath} is missing the \${CLAUDE_SKILL_DIR} resolution sentence. ` +
       "SKILL.src.md's Setup step 1 fallback sentence no longer matches the replacement in " +

@@ -139,7 +139,8 @@ it('stages resolved references independently of the source skill', async () => {
       assert.doesNotMatch(reference, /\{\{scripts_path\}\}|<codex>/);
     }
     const shellRead = await tools.bash.execute({ command: 'cat .claude/skills/impeccable/reference/critique.md' });
-    assert.ok(shellRead.includes(critique), 'shell and read tools must see the same resolved reference');
+    const shellBody = shellRead.replace(/^exit=0\nstdout:\n/, '');
+    assert.equal(shellBody, critique, 'shell and read tools must see the same resolved reference');
     assert.match(await tools.write.execute({ path: '.claude/skills/impeccable/reference/critique.md', contents: 'bad' }), /^Error:/);
   } finally {
     cleanupWorkspace(workspace);

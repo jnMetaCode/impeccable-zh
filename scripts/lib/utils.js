@@ -203,8 +203,7 @@ export function readFilesRecursive(dir, fileList = []) {
  * `{{scripts_path}}`). Naming it `SKILL.src.md` hides it from discovery so the CLI falls
  * through to a compiled harness dir (`.agents/skills/impeccable`) instead.
  */
-export function readSourceFiles(rootDir) {
-  const skillDir = path.join(rootDir, 'skill');
+export function readSourceFiles(rootDir, skillDir = path.join(rootDir, 'skill')) {
   const skills = [];
 
   const skillMdPath = path.join(skillDir, 'SKILL.src.md');

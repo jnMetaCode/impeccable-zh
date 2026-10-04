@@ -46,7 +46,10 @@ function renderNeutral(content) {
 // Use the production builder so fallback reviewer/documenter references exist.
 // Generic tool names are shared by the API providers; host-specific blocks are
 // deliberately absent. Exact provider transforms have separate loader tests.
-const sourceSkills = readSourceFiles(REPO_ROOT).skills.map((skill) => ({
+const sourceSkills = readSourceFiles(
+  REPO_ROOT,
+  process.env.IMPECCABLE_SKILL_SOURCE_DIR || undefined,
+).skills.map((skill) => ({
   ...skill,
   body: renderNeutral(skill.body),
   references: skill.references.map((ref) => ({ ...ref, content: renderNeutral(ref.content) })),
@@ -188,11 +191,16 @@ function execBash(workspace, command, timeoutMs = 20_000, extraEnv = {}) {
       cwd: workspace,
       env: { ...shellEnv, ...(ENGINE_BIN ? { IMPECCABLE_BIN: ENGINE_BIN } : {}), IMPECCABLE_QUESTION_DISABLED: '1' },
     });
+    // Let Node preserve UTF-8 code points split across stream chunks. Calling
+    // Buffer#toString() on each chunk independently can replace a split
+    // multibyte character with U+FFFD under concurrent test load.
+    proc.stdout.setEncoding('utf8');
+    proc.stderr.setEncoding('utf8');
     let stdout = '';
     let stderr = '';
     const truncatedFlag = { val: false };
     const onChunk = (which) => (chunk) => {
-      const str = chunk.toString();
+      const str = chunk;
       if (which === 'out') {
         if (stdout.length + str.length > MAX_BASH_OUTPUT_BYTES) {
           stdout += str.slice(0, MAX_BASH_OUTPUT_BYTES - stdout.length);
