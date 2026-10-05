@@ -1,11 +1,9 @@
 ## Before opening
 
-This repo is issue-first for outside contributions. If you are not `pbakaus` or `abdulwahabone`, please link the issue where a maintainer approved or requested this PR. Unsolicited PRs may be closed without review.
+This repository is issue-first for substantial contributions. Please link the issue where a maintainer confirmed the scope. Small typo and documentation fixes may use `N/A`.
 
 - Linked issue:
-- Contributor status:
-  - [ ] I am `pbakaus` or `abdulwahabone`
-  - [ ] A maintainer approved this PR in the linked issue
+- Language variant: `zh-CN` / `zh-TW` / shared tooling
 
 ## Summary
 
@@ -23,10 +21,10 @@ This repo is issue-first for outside contributions. If you are not `pbakaus` or 
 
 ## Checklist
 
-- [ ] Source files updated in `source/`
-- [ ] `bun run build` ran successfully
-- [ ] `bun test` passes
-- [ ] Tested with at least one provider (Cursor / Claude Code / Gemini CLI / Codex / Copilot / Grok Build / Kiro / OpenCode / Qoder / Mistral Vibe)
-- [ ] README / DEVELOP.md updated if needed
+- [ ] I changed localized sources or extension sources, not generated Provider output
+- [ ] `npm run localization:check -- --release` passes
+- [ ] Relevant localization and Web tests pass
+- [ ] Relevant `zh-CN` / `zh-TW` Provider build passes
+- [ ] README, changelog, or contributor docs are updated if needed
 - [ ] I reviewed the full diff myself before requesting human review
 - [ ] I disclosed any AI assistance in this PR and related commits/comments, or no AI assistance was used

@@ -11,7 +11,7 @@
 
 完整汉化 Impeccable 的 AI 产品设计工作流，提供简体中文与繁體中文，并加入中文排版、中文 UX 文案与国内常用 UI 框架指导。支持 Claude Code、Codex、Cursor、Trae 国内版、GitHub Copilot、Gemini CLI 等 19 种构建目标。
 
-**[访问简体使用中心](https://jnmetacode.github.io/impeccable-zh/)** · [繁體使用中心](https://jnmetacode.github.io/impeccable-zh/zh-TW/) · [简体文档](README.zh-CN.md) · [繁體文件](README.zh-TW.md) · [演示案例](docs/CASE-STUDY.zh-CN.md) · [上游项目](https://github.com/pbakaus/impeccable)
+**[访问简体使用中心](https://jnmetacode.github.io/impeccable-zh/)** · [繁體使用中心](https://jnmetacode.github.io/impeccable-zh/zh-TW/) · [简体文档](README.zh-CN.md) · [繁體文件](README.zh-TW.md) · [演示案例](docs/CASE-STUDY.zh-CN.md) · [变更日志](CHANGELOG.md) · [贡献指南](CONTRIBUTING.md) · [安全策略](SECURITY.md) · [上游项目](https://github.com/pbakaus/impeccable)
 
 ![Impeccable 中文版官网与使用中心](docs/assets/web-showcase.png)
 

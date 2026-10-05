@@ -142,6 +142,10 @@ node scripts/localization/sync-audit.mjs --target=upstream/main --json
 
 上游 Impeccable 使用 Apache-2.0。本專案保留上游 LICENSE 與 NOTICE；由 `ai-ui-design` 遷移的內容保留 MIT 來源宣告，詳見 [`NOTICE.md`](NOTICE.md)。
 
+## 參與專案
+
+提交翻譯、中文增強或相容性修復前，請閱讀[貢獻指南](CONTRIBUTING.md)。版本變更記錄在[變更日誌](CHANGELOG.md)；疑似漏洞請依照[安全策略](SECURITY.md)處理，不要在公開 Issue 中揭露敏感細節。
+
 ## 目前邊界
 
 - 不重寫或翻譯 Rust CLI 協議。

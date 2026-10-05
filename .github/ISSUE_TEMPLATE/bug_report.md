@@ -20,11 +20,13 @@ assignees: ''
 
 <!-- What did you expect to happen? -->
 
-## Provider & environment
+## Language, provider & environment
 
-- **Provider** (Cursor / Claude Code / Gemini CLI / Codex / Copilot / Kiro / OpenCode):
+- **Language variant** (zh-CN / zh-TW / shared tooling):
+- **Provider** (Cursor / Claude Code / Gemini CLI / Codex / Copilot / Trae CN / Qoder / other):
 - **Provider version**: 
 - **OS**: 
+- **Impeccable commit**:
 
 ## Additional context
 
@@ -32,4 +34,6 @@ assignees: ''
 
 ## Willing to work on a fix?
 
-<!-- If yes, say so here. Unless you are pbakaus or abdulwahabone, please wait for maintainer approval before opening a PR. -->
+<!-- If yes, say so here. Please wait for a maintainer to confirm the scope before opening a substantial PR. -->
+
+<!-- Security issue? Do not include secrets or exploit details here. Follow SECURITY.md. -->
