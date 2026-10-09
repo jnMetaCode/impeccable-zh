@@ -33,6 +33,14 @@ git push origin HEAD:main
 
 项目仓库 README 与个人主页不是同一个文件。个人主页内容位于 `jnMetaCode/jnMetaCode` 仓库的 `README.md`。
 
+已登录 GitHub CLI 的正常终端可以执行：
+
+```bash
+node docs/update-github-profile.mjs --apply
+```
+
+脚本先读取最新个人主页 README，仅移除三个工程项目所在区块、精简本地工具箱、添加 impeccable-zh，并给三个教程项目添加 Star 徽章，保留其他内容。结构不匹配时停止；提交使用原文件 SHA，远端发生并发修改时拒绝覆盖。不加 `--apply` 时仅生成预览。
+
 打开个人主页 README 的编辑页，将项目展示区按 [`PROFILE-README-DRAFT.zh-CN.md`](PROFILE-README-DRAFT.zh-CN.md)调整：
 
 - 主线添加 impeccable-zh；
