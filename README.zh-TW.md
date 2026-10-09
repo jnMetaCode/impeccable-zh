@@ -57,8 +57,11 @@ npm run localization:build:zh-TW
 然後在你的專案根目錄連結所需工具：
 
 ```bash
-npx impeccable link --source=/path/to/impeccable-zh --providers=claude,codex,cursor
+cd /absolute/path/to/your-project
+npx impeccable link --source=/absolute/path/to/impeccable-zh --providers=claude,codex,cursor
 ```
+
+將兩處絕對路徑替換為實際目錄。上游 CLI 透過 `--source` 連結中文建置產物；直接執行 `npx impeccable install` 使用上游分發入口。團隊使用時記錄 `git rev-parse HEAD` 並固定該 commit。
 
 重新載入 AI 程式設計工具後執行：
 

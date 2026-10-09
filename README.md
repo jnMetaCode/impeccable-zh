@@ -27,15 +27,23 @@
 
 ### 从源码开始使用
 
-当前为 Alpha，尚未发布同名稳定安装包。请固定 Git commit 从源码构建：
+当前为 Alpha，尚未发布同名稳定安装包。需要 Node.js 22.18+；先在源码仓库构建：
 
 ```bash
 git clone https://github.com/jnMetaCode/impeccable-zh.git
 cd impeccable-zh
 npm install --ignore-scripts
 npm run localization:build
-npx impeccable link --source=. --providers=claude,codex,cursor
 ```
+
+再进入你要设计的业务项目根目录，链接刚才构建的中文内容：
+
+```bash
+cd /absolute/path/to/your-project
+npx impeccable link --source=/absolute/path/to/impeccable-zh --providers=claude,codex,cursor
+```
+
+将两处绝对路径替换为实际目录。`npx impeccable` 使用上游 CLI，`--source` 指向本仓库构建的中文内容；直接运行 `npx impeccable install` 使用的是上游分发入口。团队使用时记录 `git rev-parse HEAD` 的结果并固定该 commit。
 
 繁體中文将构建命令替换为 `npm run localization:build:zh-TW`。重新加载 AI 编程工具后运行 `/impeccable init`。团队安装、更新、质量门禁和上游同步方法请阅读[简体文档](README.zh-CN.md)或[繁體文件](README.zh-TW.md)。
 
@@ -43,6 +51,9 @@ npx impeccable link --source=. --providers=claude,codex,cursor
 > 本项目是非官方社区衍生版，与上游作者不存在官方隶属或背书关系。下方保留上游英文说明，方便核对原始能力与协议边界。
 
 ---
+
+<details>
+<summary>上游英文文档（含上游安装方式；中文版请使用上面的源码构建步骤）</summary>
 
 ## Upstream English documentation
 
@@ -558,3 +569,5 @@ Apache 2.0. See [LICENSE](LICENSE).
 ---
 
 Created by [Paul Bakaus](https://www.paulbakaus.com)
+
+</details>
