@@ -41,10 +41,10 @@
 
 ```bash
 npm run localization:build:zh-TW
-npm run localization:eval:run -- --model=<model-id> --locale=zh-TW
-npm run localization:eval:score -- --results=evals/zh-TW/runs/<run>.json
+npm run localization:eval:run -- --model="MODEL_ID" --locale=zh-TW
+npm run localization:eval:score -- --results="evals/zh-TW/runs/RESULT_FILE.json"
 ```
 
-將 `<model-id>` 替換為評測 harness 支援且已設定憑證的模型。執行全部四個場景後，依輸出路徑開啟結果檔，逐條補充 verdict 與證據，再將 `<run>` 替換為實際結果檔名評分。尖括號表示佔位符，不可原樣執行。目前文件提供輸入與驗收目標，尚未附上完成改造後的實作、前後截圖或真實模型評分結果。
+將 `MODEL_ID` 替換為評測 harness 支援且已設定憑證的模型。執行全部四個場景後，依輸出路徑開啟結果檔，逐條補充 verdict 與證據，再將 `RESULT_FILE.json` 替換為實際結果檔名評分。範例中的大寫名稱是佔位符，需要先替換。目前文件提供輸入與驗收目標，尚未附上完成改造後的實作、前後截圖或真實模型評分結果。
 
 公開展示時應繼續使用“示範案例”這一名稱。只有取得真實專案授權、保留前後證據並完成測量後，才能把案例描述為客戶案例。

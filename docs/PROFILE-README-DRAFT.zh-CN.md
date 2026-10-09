@@ -14,7 +14,7 @@
 | [impeccable-zh](https://github.com/jnMetaCode/impeccable-zh) | 改善 AI 生成的中文界面：排版、UX 文案、响应式和国内 UI 框架指导；简繁体社区增强版，当前 Alpha |
 | [agency-orchestrator](https://github.com/jnMetaCode/agency-orchestrator) | 用一句需求组织多个 AI 专家协作完成任务 |
 
-**界面能运行，接下来怎样变得好用？** [Impeccable 中文使用中心](https://jnmetacode.github.io/impeccable-zh/)提供设计命令、安装指引与演示工作流。当前从源码构建，安装方法以仓库 README 为准。
+**改善 AI 生成的中文界面。** [Impeccable 中文使用中心](https://jnmetacode.github.io/impeccable-zh/)提供设计命令、安装指引与演示工作流。当前从源码构建，安装方法以仓库 README 为准。
 
 ### 🛠️ 本地 Agent 工具箱
 
