@@ -1,21 +1,25 @@
-# 示範案例：把擁擠的中文表單改成可上線體驗
+# 中文表單適配：輸入夾具與參考實作
 
 > 這是基於儲存庫測試夾具的可重現示範，不是真實客戶案例，也不包含未經驗證的轉化率或效能提升宣告。
 
 ## 場景
 
-一個使用 Element Plus 的企業後台表單需要調整桌面與手機。原始版本功能可用，但存在典型問題：中文標籤換行不可控、輸入區間距擁擠、手機觸控目標偏小、提交與取消動作層級不清晰，而且沒有載入、失敗和超長內容狀態。
+原始 Vue 3 + Element Plus 表單只有信用代碼、合約日期與一個儲存按鈕。固定 96px 標籤區容易擠壓中文長標籤；沒有設定中文日期 locale、欄位驗證與儲存邏輯。這是最小評測輸入，不是功能完整的產品。
 
 示範輸入儲存在 [`tests/localization-evals/zh-TW/fixtures/adapt-element-plus-form/App.vue`](../tests/localization-evals/zh-TW/fixtures/adapt-element-plus-form/App.vue)，對應行為評測場景為 `zh-tw-adapt-element-plus-form`。
+
+## 參考實作
+
+另有[可執行的簡體中文 Vue 3 + Element Plus 參考實作](../demos/chinese-form/README.md)，使用簡體評測夾具作為 before。它是 AI 輔助編寫的實作，不是本繁體場景的模型輸出；目前僅完成生產建置，瀏覽器截圖與互動驗收待完成。
 
 ## 建議工作流
 
 ```text
 /impeccable init
-/impeccable audit 使用者資料表單
-/impeccable typeset 使用者資料表單
-/impeccable adapt 使用者資料表單 行動版
-/impeccable polish 使用者資料表單
+/impeccable audit 客戶資料表單
+/impeccable typeset 客戶資料表單
+/impeccable adapt 客戶資料表單 行動版
+/impeccable polish 客戶資料表單
 ```
 
 ## 改進目標
@@ -23,8 +27,8 @@
 | 原始風險 | 中文版指導重點 | 可驗證結果 |
 |---|---|---|
 | 標籤與幫助文字互相擠壓 | 中文行長、行高和標點規則 | 320px 寬度下無橫向滾動，標籤不被裁切 |
-| 手機沿用桌面密度 | 觸控目標與單列斷點 | 互動目標至少 44×44 CSS px |
-| 主次動作權重相同 | 中文 UX 文案與危險動作層級 | 主動作明確，取消動作可識別且不搶奪注意力 |
+| 手機沿用桌面密度 | 觸控目標與單列斷點 | 表單輸入與動作按鈕至少 44px 高；日期網格儲存格另行檢查 |
+| 缺少儲存回饋與恢復路徑 | 中文 UX 文案與動作層級 | 儲存與清空動作可區分，失敗保留輸入並支援重試 |
 | 只驗證理想輸入 | 中文長姓名、長組織名和錯誤文案 | 超長內容、載入、失敗、空值均有穩定佈局 |
 | 直接套用框架預設值 | Element Plus 語義與覆蓋邊界 | 優先使用元件能力，定製樣式不破壞狀態和鍵盤操作 |
 

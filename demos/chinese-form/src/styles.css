@@ -1,0 +1,57 @@
+:root {
+  color: #253342;
+  background: #f5f7fa;
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.6;
+  --el-color-primary: #245ea8;
+  --el-color-primary-light-3: #547fba;
+  --el-color-primary-light-5: #8caad1;
+  --el-color-primary-light-7: #bdcfe6;
+  --el-color-primary-light-9: #e9eff7;
+  --el-color-primary-dark-2: #194980;
+  --el-color-danger: #b52c37;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: #245ea8; text-underline-offset: 0.2em; }
+::selection { background: #d7e6fa; color: #173755; }
+:focus-visible { outline: 3px solid #245ea8; outline-offset: 3px; }
+
+.page { width: min(100%, 960px); margin: auto; padding: 28px 36px 48px; }
+.page-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-bottom: 28px; }
+.brand { font-weight: 650; text-decoration: none; }
+nav { display: flex; gap: 16px; }
+nav a { display: inline-flex; min-height: 44px; align-items: center; }
+nav a[aria-current="page"] { color: #253342; font-weight: 650; }
+.form-section { background: #fff; border: 1px solid #d9e0e9; border-radius: 12px; padding: 32px; }
+h1 { margin: 0 0 12px; font-size: 28px; line-height: 1.35; }
+.intro { color: #506173; margin: 0 0 32px; }
+.customer-form { max-width: 720px; }
+.customer-form .el-form-item { margin-bottom: 32px; }
+.customer-form .el-form-item__label { height: auto; white-space: normal; line-height: 1.6; padding-top: 9px; padding-bottom: 9px; }
+.customer-form .el-input, .customer-form .el-date-editor { width: 100%; min-width: 0; }
+.customer-form .el-input__wrapper { min-height: 44px; }
+.customer-form .el-input__inner { font-size: 16px; }
+.customer-form .el-form-item__content { min-width: 0; }
+.customer-form .el-form-item__error { position: static; padding-top: 6px; line-height: 1.6; font-size: 14px; overflow-wrap: anywhere; }
+.field-help { flex-basis: 100%; color: #506173; margin: 8px 0 0; line-height: 1.65; font-size: 14px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; padding-left: 200px; }
+.actions .el-button { min-height: 44px; margin: 0; }
+.save-status { margin: 16px 0 0; color: #244e39; min-height: 26px; overflow-wrap: anywhere; }
+.save-status.failed { color: #a32632; }
+.demo-notes { padding-top: 28px; color: #506173; font-size: 14px; }
+.demo-notes h2 { color: #253342; font-size: 16px; margin: 0 0 8px; }
+.demo-notes p { margin: 8px 0; max-width: 65ch; }
+.failure-control { display: flex; align-items: center; gap: 10px; min-height: 44px; cursor: pointer; }
+.failure-control input { flex: 0 0 auto; width: 20px; height: 20px; accent-color: #245ea8; }
+.demo-date-popover .el-date-picker { width: min(322px, calc(100vw - 24px)); }
+
+@media (max-width: 640px) {
+  .page { padding: 16px 12px 32px; }
+  .page-header { align-items: flex-start; flex-direction: column; gap: 4px; padding-bottom: 20px; }
+  .form-section { padding: 20px 16px; }
+  .customer-form .el-form-item__label { padding-top: 0; }
+  .actions { padding-left: 0; flex-direction: column; }
+  .actions .el-button { width: 100%; }
+}

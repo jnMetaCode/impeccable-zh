@@ -95,7 +95,7 @@ npm run web:preview
 
 ## 示範案例
 
-儲存庫提供 Element Plus 中文表單的輸入夾具、建議工作流 `audit → typeset → adapt → polish` 與驗收目標。目前尚未公開完成後的改造實作、前後截圖與真實模型評分。
+儲存庫提供 Element Plus 中文表單的輸入夾具、建議工作流 `audit → typeset → adapt → polish` 與驗收目標。已提供[可執行的簡體中文 Vue 3 + Element Plus 參考實作](demos/chinese-form/README.md)，它不是模型執行結果；前後截圖與真實模型評分尚未公開。
 
 這個案例使用儲存庫測試夾具，不冒充真實客戶專案，也不虛構轉化率資料。檢視[完整案例與重現步驟](docs/CASE-STUDY.zh-TW.md)。
 

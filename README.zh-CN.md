@@ -93,7 +93,7 @@ npm run web:preview
 
 ## 演示案例
 
-仓库提供 Element Plus 中文表单的输入夹具、建议工作流 `audit → typeset → adapt → polish` 与验收目标。当前尚未公开完成后的改造实现、前后截图与真实模型评分。
+仓库提供 Element Plus 中文表单的输入夹具、建议工作流 `audit → typeset → adapt → polish` 与验收目标。已提供[可运行的 Vue 3 + Element Plus 参考实现](demos/chinese-form/README.md)，它不是模型运行结果；前后截图与真实模型评分尚未公开。
 
 这个案例使用仓库测试夹具，不冒充真实客户项目，也不虚构转化率数据。查看[完整案例与复现步骤](docs/CASE-STUDY.zh-CN.md)。
 
