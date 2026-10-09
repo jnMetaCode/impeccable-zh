@@ -1,6 +1,6 @@
-# Impeccable 中文社区增强版
+# Impeccable 中文增强版
 
-> 让 AI 不止会写界面，还懂中文产品设计。
+> 让 AI 更懂中文界面设计。
 
 [![简体中文](https://img.shields.io/badge/简体中文-43%2F43-success)](locales/zh-CN/source-map.json)
 [![繁體中文](https://img.shields.io/badge/繁體中文-43%2F43-success)](locales/zh-TW/source-map.json)
@@ -9,7 +9,7 @@
 [![Localization CI](https://github.com/jnMetaCode/impeccable-zh/actions/workflows/localization-ci.yml/badge.svg)](https://github.com/jnMetaCode/impeccable-zh/actions/workflows/localization-ci.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 
-完整汉化 Impeccable 的 AI 产品设计工作流，提供简体中文与繁體中文，并加入中文排版、中文 UX 文案与国内常用 UI 框架指导。支持 Claude Code、Codex、Cursor、Trae 国内版、GitHub Copilot、Gemini CLI 等 19 种构建目标。
+本地化 Impeccable 的 AI 界面设计工作流，提供简体中文与繁體中文，并加入中文排版、中文 UX 文案与国内常用 UI 框架指导。提供 Claude Code、Codex、Cursor、Trae 国内版、GitHub Copilot、Gemini CLI 等工具的 19 个构建目标。
 
 **[访问简体使用中心](https://jnmetacode.github.io/impeccable-zh/)** · [繁體使用中心](https://jnmetacode.github.io/impeccable-zh/zh-TW/) · [简体文档](README.zh-CN.md) · [繁體文件](README.zh-TW.md) · [演示案例](docs/CASE-STUDY.zh-CN.md) · [变更日志](CHANGELOG.md) · [贡献指南](CONTRIBUTING.md) · [安全策略](SECURITY.md) · [上游项目](https://github.com/pbakaus/impeccable)
 
@@ -21,9 +21,18 @@
 |---|---|
 | 核心中文内容 | 简体 43 / 43、繁體 43 / 43，均带逐文件上游漂移检查 |
 | 中文原创增强 | 中文排版、中文 UX 文案、国内 UI 框架 |
-| 设计工作流 | 24 个命令、61 条确定性检测规则 |
+| 设计工作流 | 24 个命令入口（含 `craft` 兼容别名）、61 条上游确定性检测规则 |
 | 工具接入 | 19 个 Provider 构建目标 |
-| 使用与展示 | 响应式中文 Web 使用中心、安装向导与可复现案例 |
+| 使用与展示 | 中文 Web 使用中心、安装向导、案例输入与验收目标 |
+
+### 数据口径与验证范围
+
+- **43/43**：每种语言跟踪的核心文件数，包含 1 个 Skill 入口、38 个参考文档、4 个 Agent 契约；不代表 CLI、错误消息或所有上游文档已汉化。
+- **24 个命令入口**：其中 `craft` 是已弃用的兼容别名，新任务可以直接描述需求；中文增强没有新增命令。
+- **61 条检测规则**：继承上游引擎，不是新增的中文专用规则；检测器无需模型，设计生成与上下文评审仍依赖所用 AI 工具。
+- **19 个构建目标**：包含 Codex 的两种分发路径，不等于 19 款不同工具均通过真实宿主验证。安装与更新 E2E 的配置覆盖 Claude Code、Codex、Cursor，采用隔离工作区与替身引擎；它不验证真实工具里的模型效果。
+
+数据基于 [`upstream-lock.json`](upstream-lock.json) 锁定的上游 commit `0d6b47ea19b6`。中文覆盖与构建检查不等于设计效果评测；案例目前提供输入、建议工作流和验收目标，尚未公开完整改造结果。
 
 ### 从源码开始使用
 
@@ -96,7 +105,7 @@ All commands are accessed through `/impeccable`:
 
 | Command | What it does |
 |---------|--------------|
-| `/impeccable craft` | Full shape-then-build flow with visual iteration |
+| `/impeccable craft` | Deprecated compatibility alias for an ordinary new-work request; adds no behavior |
 | `/impeccable init` | One-time setup: gather durable product context, write PRODUCT.md, configure live mode when applicable, recommend next steps |
 | `/impeccable document` | Generate root DESIGN.md from existing project code |
 | `/impeccable extract` | Pull reusable components and tokens into the design system |

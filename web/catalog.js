@@ -32,7 +32,7 @@ export const providers = Object.freeze([
 
 export const commands = Object.freeze([
   { name: 'init', category: '开始', title: '建立项目上下文', description: '访谈并写入 PRODUCT.md，为后续设计工作建立长期事实。', target: '' },
-  { name: 'craft', category: '构建', title: '完整设计与构建', description: '从需求塑形到视觉迭代，完成一条端到端的新工作流。', target: '功能描述' },
+  { name: 'craft', category: '构建', title: '兼容旧版命令', description: '已弃用的兼容别名；新任务直接描述需求即可，不增加独立行为。', target: '功能描述' },
   { name: 'shape', category: '构建', title: '先规划，再编码', description: '通过多轮探索形成经确认的 UX/UI 设计简报。', target: '功能' },
   { name: 'document', category: '系统', title: '记录设计系统', description: '从现有代码生成颜色、字体、组件与氛围一致的 DESIGN.md。', target: '' },
   { name: 'extract', category: '系统', title: '提取复用模式', description: '将重复的组件与设计令牌收敛进设计系统。', target: '范围' },

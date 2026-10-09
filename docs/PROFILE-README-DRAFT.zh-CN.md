@@ -11,7 +11,7 @@
 |---|---|
 | [agency-agents-zh](https://github.com/jnMetaCode/agency-agents-zh) | 需要产品、工程、设计、运营等不同领域的 AI 专家角色 |
 | [superpowers-zh](https://github.com/jnMetaCode/superpowers-zh) | 让 AI 按工作方法推进开发、调试和代码审查 |
-| [impeccable-zh](https://github.com/jnMetaCode/impeccable-zh) | 改善 AI 生成的中文界面：排版、UX 文案、响应式和国内 UI 框架指导；简繁体社区增强版，当前 Alpha |
+| [impeccable-zh](https://github.com/jnMetaCode/impeccable-zh) | 改善 AI 生成的中文界面：排版、UX 文案、响应式和国内 UI 框架指导；简繁体中文增强版，当前 Alpha |
 | [agency-orchestrator](https://github.com/jnMetaCode/agency-orchestrator) | 用一句需求组织多个 AI 专家协作完成任务 |
 
 **改善 AI 生成的中文界面。** [Impeccable 中文使用中心](https://jnmetacode.github.io/impeccable-zh/)提供设计命令、安装指引与演示工作流。当前从源码构建，安装方法以仓库 README 为准。

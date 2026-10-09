@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { PROVIDERS } from '../scripts/lib/transformers/providers.js';
 
 import { commandText, commands, installSteps, project, providers } from '../web/catalog.js';
 import {
@@ -18,12 +19,16 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 test('web catalog stays aligned with localization and command sources', () => {
   const metadata = JSON.parse(fs.readFileSync(path.join(root, 'skill/scripts/command-metadata.json'), 'utf8'));
   const sourceMap = JSON.parse(fs.readFileSync(path.join(root, 'locales/zh-CN/source-map.json'), 'utf8'));
+  const rules = JSON.parse(fs.readFileSync(path.join(root, 'crates/live/assets/antipatterns.json'), 'utf8'));
   assert.equal(providers.length, 19);
   assert.equal(commands.length, 24);
   assert.equal(new Set(providers.map((provider) => provider.id)).size, providers.length);
   assert.equal(new Set(commands.map((command) => command.name)).size, commands.length);
   assert.deepEqual(commands.map((command) => command.name).sort(), Object.keys(metadata).sort());
   assert.equal(sourceMap.entries.length, project.total);
+  assert.equal(sourceMap.entries.filter((entry) => entry.status === 'current').length, project.translated);
+  assert.equal(new Set(rules.map((rule) => rule.id)).size, project.rules);
+  assert.deepEqual(providers.map((provider) => provider.build).sort(), Object.keys(PROVIDERS).sort());
 });
 
 test('Traditional Chinese web catalog mirrors all supported capabilities', () => {
@@ -33,6 +38,8 @@ test('Traditional Chinese web catalog mirrors all supported capabilities', () =>
   assert.deepEqual(traditionalCommands.map((command) => command.name), commands.map((command) => command.name));
   assert.equal(traditionalProject.total, project.total);
   assert.equal(sourceMap.entries.length, traditionalProject.total);
+  assert.equal(sourceMap.entries.filter((entry) => entry.status === 'current').length, traditionalProject.translated);
+  assert.equal(traditionalProject.rules, project.rules);
   assert.match(traditionalInstallSteps('codex')[2], /localization:build:zh-TW/);
   assert.match(traditionalCommandText(traditionalCommands[0]), /^\/impeccable init/);
 });

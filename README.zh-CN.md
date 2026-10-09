@@ -1,7 +1,7 @@
 <div align="center">
   <img src="extension/icons/icon-128.png" width="88" alt="Impeccable 图标">
-  <h1>Impeccable 中文社区增强版</h1>
-  <p><strong>让 AI 不止会写界面，还懂中文产品设计。</strong></p>
+  <h1>Impeccable 中文增强版</h1>
+  <p><strong>让 AI 更懂中文界面设计。</strong></p>
   <p>完整汉化 Impeccable，并加入中文排版、中文 UX 文案与国内 UI 框架指导。</p>
 
   [![Localization](https://img.shields.io/badge/中文覆盖-43%2F43-success)](locales/zh-CN/source-map.json)
@@ -36,10 +36,12 @@
 
 - **43/43 核心源文件完整汉化**：入口、38 个参考文档和 4 个 Agent 契约。
 - **3 项中国场景原创增强**：中文排版、中文 UX 文案、国内常用 UI 框架。
-- **24 个设计命令**：从 `init`、`shape` 到 `audit`、`polish`、`live`。
-- **61 条确定性检测规则**：无需模型和 API Key 即可运行。
+- **24 个命令入口（含 `craft` 兼容别名）**：从 `init`、`shape` 到 `audit`、`polish`、`live`。
+- **61 条上游确定性检测规则**：检测无需模型和 API Key；设计生成与上下文评审仍依赖 AI 工具。
 - **19 个构建目标**：Claude Code、Codex、Cursor、Trae 国内版、GitHub Copilot、Gemini CLI 等。
 - **上游漂移守卫**：逐文件记录 Git blob，上游变化后必须人工复核翻译。
+
+数字口径、来源和验证边界见[项目首页](README.md#数据口径与验证范围)。
 
 ## 快速开始
 
@@ -91,7 +93,7 @@ npm run web:preview
 
 ## 演示案例
 
-仓库提供一个可复现的 Element Plus 中文表单演示：从标签拥挤、手机密度过高和状态缺失，逐步经过 `audit → typeset → adapt → polish`，并用明确检查项验证结果。
+仓库提供 Element Plus 中文表单的输入夹具、建议工作流 `audit → typeset → adapt → polish` 与验收目标。当前尚未公开完成后的改造实现、前后截图与真实模型评分。
 
 这个案例使用仓库测试夹具，不冒充真实客户项目，也不虚构转化率数据。查看[完整案例与复现步骤](docs/CASE-STUDY.zh-CN.md)。
 
@@ -128,7 +130,7 @@ npm run web:test
 npm run web:build
 ```
 
-当前门禁覆盖翻译完整性、上游漂移、19 个 Provider 构建、安装与更新 E2E、中文行为评测结构、Web 数据一致性和响应式浏览器冒烟检查。模型行为评测不会默认调用外部 API；配置方法见 [`tests/localization-evals/README.md`](tests/localization-evals/README.md)。
+CI 配置覆盖翻译完整性、上游漂移、19 个 Provider 构建，以及 Claude Code、Codex、Cursor 的隔离安装与更新 E2E；后者使用替身引擎，不运行真实 AI 工具。网页测试检查内容、语义与 CSS 契约，不等于浏览器响应式或无障碍验证。19 个目标包含 Codex 的两种分发路径。模型行为评测不会默认调用外部 API；配置方法见 [`tests/localization-evals/README.md`](tests/localization-evals/README.md)。
 
 ## 上游同步
 
