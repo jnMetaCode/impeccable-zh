@@ -8,7 +8,20 @@ import { spawnSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 
 const repository = 'jnMetaCode/jnMetaCode';
-const badge = (name) => `[![Stars](https://img.shields.io/github/stars/jnMetaCode/${name}?style=flat&label=Stars)](https://github.com/jnMetaCode/${name}/stargazers)`;
+const badge = (name) => `[![Star 数量](https://img.shields.io/github/stars/jnMetaCode/${name}?style=flat&label=⭐)](https://github.com/jnMetaCode/${name}/stargazers)`;
+
+export function tutorialTable() {
+  const tutorials = [
+    ['ai-coding-guide', 'AI 编程实战指南：66 个 Claude Code 技巧 + 10 款工具最佳实践'],
+    ['ai-coding-trilogy', 'AI 编程三卷书（入门 / 工作流 / 架构，中英双语 PDF）'],
+    ['ai-shortfilm-prompts', 'AI 短片《丧尸清道夫》方法论 + 提示词（Sora / 可灵 / 即梦通用）'],
+  ];
+  return [
+    '| 项目 | 内容 | Stars |',
+    '|---|---|---|',
+    ...tutorials.map(([name, description]) => `| [${name}](https://github.com/jnMetaCode/${name}) | ${description} | ${badge(name)} |`),
+  ].join('\n');
+}
 
 function replaceSection(source, title, replacement, required = true) {
   const headings = [...source.matchAll(/^#{1,6} .*$/gm)];
@@ -20,7 +33,9 @@ function replaceSection(source, title, replacement, required = true) {
   }
   const heading = matches[0];
   const next = headings.find((item) => item.index > heading.index);
-  return source.slice(0, heading.index) + replacement + source.slice(next?.index ?? source.length);
+  const end = next?.index ?? source.length;
+  const updated = typeof replacement === 'function' ? replacement(source.slice(heading.index, end)) : replacement;
+  return source.slice(0, heading.index) + updated + source.slice(end);
 }
 
 export function updateProfile(source) {
@@ -36,6 +51,11 @@ export function updateProfile(source) {
   ].join('\n'));
 
   const rows = result.split('\n');
+  for (let index = 0; index < rows.length; index++) {
+    if (/^\|\s*项目\s*\|\s*它能帮你干嘛\s*\|\s*\|\s*$/.test(rows[index])) {
+      rows[index] = '| 项目 | 它能帮你干嘛 | Stars |';
+    }
+  }
   const anchor = rows.findIndex((line) => /\]\(https:\/\/github\.com\/jnMetaCode\/superpowers-zh\)/.test(line) && line.includes('|'));
   assert.ok(anchor >= 0, 'Main project table not found; review the remote README manually.');
   const cellCount = rows[anchor].replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|').length;
@@ -49,17 +69,27 @@ export function updateProfile(source) {
   if (existing >= 0) rows[existing] = projectRow;
   else rows.splice(anchor + 1, 0, projectRow);
 
-  for (const name of ['ai-coding-guide', 'ai-coding-trilogy', 'ai-shortfilm-prompts']) {
-    const indexes = rows.flatMap((line, index) => line.includes(`](https://github.com/jnMetaCode/${name})`) ? [index] : []);
-    assert.equal(indexes.length, 1, `Expected one tutorial entry for ${name}; review manually.`);
-    const index = indexes[0];
-    if (!rows[index].includes(`img.shields.io/github/stars/jnMetaCode/${name}`)) {
-      rows[index] = /\|\s*$/.test(rows[index])
-        ? rows[index].replace(/\|\s*$/, ` ${badge(name)} |`)
-        : `${rows[index]} ${badge(name)}`;
-    }
-  }
   result = rows.join('\n');
+  result = replaceSection(result, /教程.*创作/, (section) => {
+    const lines = section.split('\n');
+    const names = ['ai-coding-guide', 'ai-coding-trilogy', 'ai-shortfilm-prompts'];
+    for (const name of names) {
+      assert.equal(lines.filter((line) => line.includes(`](https://github.com/jnMetaCode/${name})`)).length, 1, `Expected one tutorial entry for ${name}; review manually.`);
+    }
+    const extra = lines.slice(1).filter((line) => {
+      if (!line.trim() || names.some((name) => line.includes(`github.com/jnMetaCode/${name}`))) return false;
+      if (/^[\s|:-]+$/.test(line)) return false;
+      if (line.includes('|') && !line.includes('](')) {
+        const cells = line.split('|').map((cell) => cell.trim()).filter(Boolean);
+        if (cells.every((cell) => ['项目', '内容', 'Stars', '⭐ Stars'].includes(cell))) return false;
+      }
+      return true;
+    }).map((line) => {
+      if (!line.includes('|')) return line;
+      return '- ' + line.replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|').map((cell) => cell.trim()).join(' — ');
+    });
+    return [lines[0], '', tutorialTable(), ...(extra.length ? ['', ...extra] : []), '', ''].join('\n');
+  });
   for (const name of ['repo-rag', 'orchestrator-lg', 'llm-gateway']) {
     assert.ok(!result.includes(`github.com/jnMetaCode/${name}`), `Unexpected ${name} link remains; review manually.`);
   }
@@ -94,7 +124,7 @@ function main() {
   const payload = path.join(temporary, 'payload.json');
   try {
     fs.writeFileSync(payload, JSON.stringify({
-      message: 'Docs: focus profile projects and add Star badges (AI-assisted)',
+      message: 'Docs: refine profile tables and gold Star counters (AI-assisted)',
       content: Buffer.from(updated).toString('base64'),
       sha: remote.sha,
     }));

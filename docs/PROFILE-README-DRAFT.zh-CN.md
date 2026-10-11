@@ -24,11 +24,11 @@ Claude Code 用户按[套件安装说明](https://github.com/jnMetaCode/local-ag
 
 ### 📖 教程 · 创作
 
-| 项目 | 内容 | Stars |
+| 项目 | 内容 | ⭐ Stars |
 |---|---|---|
-| [ai-coding-guide](https://github.com/jnMetaCode/ai-coding-guide) | AI 编程实战指南：66 个 Claude Code 技巧 + 10 款工具最佳实践 | [![GitHub Stars](https://img.shields.io/github/stars/jnMetaCode/ai-coding-guide?style=flat&label=Stars)](https://github.com/jnMetaCode/ai-coding-guide/stargazers) |
-| [ai-coding-trilogy](https://github.com/jnMetaCode/ai-coding-trilogy) | AI 编程三卷书（入门 / 工作流 / 架构，中英双语 PDF） | [![GitHub Stars](https://img.shields.io/github/stars/jnMetaCode/ai-coding-trilogy?style=flat&label=Stars)](https://github.com/jnMetaCode/ai-coding-trilogy/stargazers) |
-| [ai-shortfilm-prompts](https://github.com/jnMetaCode/ai-shortfilm-prompts) | AI 短片《丧尸清道夫》方法论 + 提示词（Sora / 可灵 / 即梦通用） | [![GitHub Stars](https://img.shields.io/github/stars/jnMetaCode/ai-shortfilm-prompts?style=flat&label=Stars)](https://github.com/jnMetaCode/ai-shortfilm-prompts/stargazers) |
+| [ai-coding-guide](https://github.com/jnMetaCode/ai-coding-guide) | AI 编程实战指南：66 个 Claude Code 技巧 + 10 款工具最佳实践 | [⭐ ![Star 数量](https://img.shields.io/github/stars/jnMetaCode/ai-coding-guide?style=flat&label=&color=fff4cc)](https://github.com/jnMetaCode/ai-coding-guide/stargazers) |
+| [ai-coding-trilogy](https://github.com/jnMetaCode/ai-coding-trilogy) | AI 编程三卷书（入门 / 工作流 / 架构，中英双语 PDF） | [⭐ ![Star 数量](https://img.shields.io/github/stars/jnMetaCode/ai-coding-trilogy?style=flat&label=&color=fff4cc)](https://github.com/jnMetaCode/ai-coding-trilogy/stargazers) |
+| [ai-shortfilm-prompts](https://github.com/jnMetaCode/ai-shortfilm-prompts) | AI 短片《丧尸清道夫》方法论 + 提示词（Sora / 可灵 / 即梦通用） | [⭐ ![Star 数量](https://img.shields.io/github/stars/jnMetaCode/ai-shortfilm-prompts?style=flat&label=&color=fff4cc)](https://github.com/jnMetaCode/ai-shortfilm-prompts/stargazers) |
 
 [免费课程](https://aiolaola.com/) · [更多项目](https://github.com/jnMetaCode?tab=repositories)
 
