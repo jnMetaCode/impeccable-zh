@@ -10,8 +10,8 @@ import { pathToFileURL } from 'node:url';
 const repository = 'jnMetaCode/jnMetaCode';
 const badge = (name) => `[![Star 数量](https://img.shields.io/github/stars/jnMetaCode/${name}?style=flat&label=⭐)](https://github.com/jnMetaCode/${name}/stargazers)`;
 
-export function tutorialTable() {
-  const tutorials = [
+export function tutorialTable(entries) {
+  const tutorials = entries ?? [
     ['ai-coding-guide', 'AI 编程实战指南：66 个 Claude Code 技巧 + 10 款工具最佳实践'],
     ['ai-coding-trilogy', 'AI 编程三卷书（入门 / 工作流 / 架构，中英双语 PDF）'],
     ['ai-shortfilm-prompts', 'AI 短片《丧尸清道夫》方法论 + 提示词（Sora / 可灵 / 即梦通用）'],
@@ -40,7 +40,7 @@ function replaceSection(source, title, replacement, required = true) {
 
 export function updateProfile(source) {
   let result = replaceSection(source, /评估驱动的.*应用工程/, '', false);
-  result = replaceSection(result, /local-agent-toolkit.*本地三件套|本地 Agent 工具箱/, [
+  result = replaceSection(result, /local-agent-toolkit.*本地三件套/, [
     '#### 🛠️ 本地 Agent 工具箱',
     '',
     '[**local-agent-toolkit**](https://github.com/jnMetaCode/local-agent-toolkit)：给 Agent 加上本地记忆 **engram**、技能管理 **skillet** 和运行追踪 **tracelet**。三个工具可独立使用，也提供组合演示；支持通过 `npx` 运行，无需手动全局安装。',
@@ -48,7 +48,7 @@ export function updateProfile(source) {
     'Claude Code 用户按[套件安装说明](https://github.com/jnMetaCode/local-agent-toolkit#install-as-a-claude-code-plugin-one-command)添加市场并安装插件。追踪面板需要另行启动 tracelet，并接入 tracing。',
     '',
     '',
-  ].join('\n'));
+  ].join('\n'), false);
 
   const rows = result.split('\n');
   for (let index = 0; index < rows.length; index++) {
@@ -66,15 +66,29 @@ export function updateProfile(source) {
   for (let index = cells.length; index < cellCount; index++) cells.push(index === 2 ? badge('impeccable-zh') : '');
   const projectRow = `| ${cells.join(' | ')} |`;
   const existing = rows.findIndex((line) => /\]\(https:\/\/github\.com\/jnMetaCode\/impeccable-zh\)/.test(line) && line.includes('|'));
-  if (existing >= 0) rows[existing] = projectRow;
+  if (existing >= 0) {
+    const existingCells = rows[existing].replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|').map((cell) => cell.trim());
+    assert.equal(existingCells.length, cellCount, 'Project table column count changed; review manually.');
+    if (cellCount >= 3) existingCells[2] = badge('impeccable-zh');
+    rows[existing] = `| ${existingCells.join(' | ')} |`;
+  }
   else rows.splice(anchor + 1, 0, projectRow);
 
   result = rows.join('\n');
   result = replaceSection(result, /教程.*创作/, (section) => {
     const lines = section.split('\n');
     const names = ['ai-coding-guide', 'ai-coding-trilogy', 'ai-shortfilm-prompts'];
+    const entries = [];
     for (const name of names) {
-      assert.equal(lines.filter((line) => line.includes(`](https://github.com/jnMetaCode/${name})`)).length, 1, `Expected one tutorial entry for ${name}; review manually.`);
+      const matches = lines.filter((line) => line.includes(`](https://github.com/jnMetaCode/${name})`));
+      assert.equal(matches.length, 1, `Expected one tutorial entry for ${name}; review manually.`);
+      const line = matches[0];
+      const description = (line.includes('|')
+        ? line.replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|')[1]
+        : line.slice(line.indexOf(`](https://github.com/jnMetaCode/${name})`) + `](https://github.com/jnMetaCode/${name})`.length).replace(/^\s*[—–-]\s*/, ''))
+        .replace(/\[!\[[^\]]*\]\(https:\/\/img\.shields\.io\/[^)]*\)\]\([^)]*\)/g, '').trim();
+      assert.ok(description, `Missing description for ${name}; review manually.`);
+      entries.push([name, description]);
     }
     const extra = lines.slice(1).filter((line) => {
       if (!line.trim() || names.some((name) => line.includes(`github.com/jnMetaCode/${name}`))) return false;
@@ -88,7 +102,7 @@ export function updateProfile(source) {
       if (!line.includes('|')) return line;
       return '- ' + line.replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|').map((cell) => cell.trim()).join(' — ');
     });
-    return [lines[0], '', tutorialTable(), ...(extra.length ? ['', ...extra] : []), '', ''].join('\n');
+    return [lines[0], '', tutorialTable(entries), ...(extra.length ? ['', ...extra] : []), '', ''].join('\n');
   });
   for (const name of ['repo-rag', 'orchestrator-lg', 'llm-gateway']) {
     assert.ok(!result.includes(`github.com/jnMetaCode/${name}`), `Unexpected ${name} link remains; review manually.`);
