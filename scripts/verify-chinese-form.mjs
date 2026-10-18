@@ -4,15 +4,31 @@ import fs from 'node:fs';
 import http from 'node:http';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createHash } from 'node:crypto';
 import { chromium } from 'playwright';
 
 const root = path.resolve(fileURLToPath(new URL('..', import.meta.url)));
 const built = path.join(root, 'demos/chinese-form/dist');
-const output = path.join(root, 'build/chinese-form-evidence');
+const evidenceRoot = path.join(root, 'build/chinese-form-evidence');
 assert.ok(fs.existsSync(path.join(built, 'index.html')), 'Build the demo first: npm --prefix demos/chinese-form run build');
-fs.mkdirSync(output, { recursive: true });
+fs.mkdirSync(evidenceRoot, { recursive: true });
+const output = fs.mkdtempSync(path.join(evidenceRoot, 'run-'));
 const reportPath = path.join(output, 'report.json');
-fs.rmSync(reportPath, { force: true });
+const timestamp = new Date().toISOString();
+const artifacts = Object.fromEntries(fs.readdirSync(built, { recursive: true })
+  .filter((file) => fs.statSync(path.join(built, file)).isFile())
+  .sort()
+  .map((file) => [file, createHash('sha256').update(fs.readFileSync(path.join(built, file))).digest('hex')]));
+const untested = ['real touch devices', 'browser 200% zoom', 'screen readers', 'complete keyboard navigation'];
+
+function report(status, extra = {}) {
+  fs.writeFileSync(reportPath, JSON.stringify({
+    status, timestamp, artifacts,
+    implementation: 'AI-assisted reference implementation; not a model efficacy evaluation',
+    checks, untested, ...extra,
+  }, null, 2) + '\n');
+  console.log(`Browser verification ${status}; report: ${reportPath}`);
+}
 
 const mime = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css' };
 const server = http.createServer((request, response) => {
@@ -75,7 +91,6 @@ try {
         assert.equal(await page.locator('#credit-code').inputValue(), '91350211M000100Y43');
         await page.getByRole('button', { name: '保存客户资料', exact: true }).click();
         await page.getByRole('status').filter({ hasText: '演示保存完成' }).waitFor();
-        checks.push({ width, layout: 'pass', dateLocale: 'pass', validation: 'pass', retry: 'pass' });
       }
       if (version === 'after') {
         await page.screenshot({ path: path.join(output, `after-saved-${width}.png`), fullPage: true });
@@ -85,15 +100,13 @@ try {
       }
     }
     assert.deepEqual(pageErrors, []);
+    checks.push({ width, layout: 'pass', dateLocale: 'pass', validation: 'pass', retry: 'pass', clear: 'pass' });
     await page.close();
   }
-  fs.writeFileSync(reportPath, JSON.stringify({
-    status: 'pass', browser: browser.version(), timestamp: new Date().toISOString(),
-    implementation: 'AI-assisted reference implementation; not a model efficacy evaluation',
-    checks,
-    untested: ['real touch devices', 'browser 200% zoom', 'screen readers', 'complete keyboard navigation'],
-  }, null, 2) + '\n');
-  console.log(`Browser checks passed; evidence: ${output}`);
+  report('pass', { browser: browser.version() });
+} catch (error) {
+  report(error.code === 'EPERM' ? 'blocked' : 'fail', { error: error.message });
+  process.exitCode = 1;
 } finally {
   if (browser) await browser.close();
   if (server.listening) await new Promise((resolve) => server.close(resolve));
