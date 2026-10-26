@@ -87,11 +87,11 @@
     "web:test": "node --test tests/web.test.mjs"
   },
   "optionalDependencies": {
-    "@impeccable/cli-darwin-arm64": "0.1.8",
-    "@impeccable/cli-darwin-x64": "0.1.8",
-    "@impeccable/cli-linux-x64": "0.1.8",
-    "@impeccable/cli-linux-arm64": "0.1.8",
-    "@impeccable/cli-windows-x64": "0.1.8"
+    "@impeccable/cli-darwin-arm64": "0.1.16",
+    "@impeccable/cli-darwin-x64": "0.1.16",
+    "@impeccable/cli-linux-x64": "0.1.16",
+    "@impeccable/cli-linux-arm64": "0.1.16",
+    "@impeccable/cli-windows-x64": "0.1.16"
   },
   "devDependencies": {
     "@ai-sdk/anthropic": "^4.0.7",
