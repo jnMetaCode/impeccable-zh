@@ -30,10 +30,12 @@ const profile = `### AI不止语
 
 test('preserves newer descriptions, toolkit content and unrelated sections', () => {
   const result = updateProfile(profile);
-  for (const text of ['更新为 80 个技巧和 12 款工具', '更新后的三卷书介绍', '新增的短片方法', '用户更新后的安装说明', '用户新增的工具箱使用经验。']) {
+  for (const text of ['更新为 80 个技巧和 12 款工具', '更新后的三卷书介绍', '新增的短片方法', '用户新增的工具箱使用经验。']) {
     assert.ok(result.includes(text));
   }
   assert.ok(!result.includes('66 个 Claude Code 技巧'));
+  assert.ok(!result.includes('github.com/jnMetaCode/impeccable-zh'));
+  assert.equal(updateProfile(profile.replace(/.*\[impeccable-zh\].*\n/, '')), result);
   assert.equal(result.slice(result.indexOf('#### 课程')), profile.slice(profile.indexOf('#### 课程')) + '\n<!-- AI-assisted profile update -->\n');
   assert.ok(result.includes('| 项目 | 内容 | Stars |'));
   assert.equal(updateProfile(result), result);

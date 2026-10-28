@@ -56,23 +56,10 @@ export function updateProfile(source) {
       rows[index] = '| 项目 | 它能帮你干嘛 | Stars |';
     }
   }
-  const anchor = rows.findIndex((line) => /\]\(https:\/\/github\.com\/jnMetaCode\/superpowers-zh\)/.test(line) && line.includes('|'));
-  assert.ok(anchor >= 0, 'Main project table not found; review the remote README manually.');
-  const cellCount = rows[anchor].replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|').length;
-  const cells = [
-    '[impeccable-zh](https://github.com/jnMetaCode/impeccable-zh)',
-    '**Impeccable 中文增强版**：中文排版、UX 文案与国内 UI 框架指导，提供简繁体内容与设计工作流；当前 Alpha，从源码安装',
-  ];
-  for (let index = cells.length; index < cellCount; index++) cells.push(index === 2 ? badge('impeccable-zh') : '');
-  const projectRow = `| ${cells.join(' | ')} |`;
-  const existing = rows.findIndex((line) => /\]\(https:\/\/github\.com\/jnMetaCode\/impeccable-zh\)/.test(line) && line.includes('|'));
-  if (existing >= 0) {
-    const existingCells = rows[existing].replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|').map((cell) => cell.trim());
-    assert.equal(existingCells.length, cellCount, 'Project table column count changed; review manually.');
-    if (cellCount >= 3) existingCells[2] = badge('impeccable-zh');
-    rows[existing] = `| ${existingCells.join(' | ')} |`;
+  // Temporarily withdraw this project from profile promotion; keep its repository public.
+  for (let index = rows.length - 1; index >= 0; index--) {
+    if (rows[index].includes('|') && /\]\(https:\/\/github\.com\/jnMetaCode\/impeccable-zh\)/.test(rows[index])) rows.splice(index, 1);
   }
-  else rows.splice(anchor + 1, 0, projectRow);
 
   result = rows.join('\n');
   result = replaceSection(result, /教程.*创作/, (section) => {
@@ -138,7 +125,7 @@ function main() {
   const payload = path.join(temporary, 'payload.json');
   try {
     fs.writeFileSync(payload, JSON.stringify({
-      message: 'Docs: refine profile tables and gold Star counters (AI-assisted)',
+      message: 'Docs: withdraw impeccable-zh profile promotion (AI-assisted)',
       content: Buffer.from(updated).toString('base64'),
       sha: remote.sha,
     }));
